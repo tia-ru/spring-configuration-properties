@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>spring-properties-test</artifactId>
+    <version>0.1</version>
+    <packaging>pom</packaging>
+    <name>Spring XML Properties Metadata - Test</name>
+    <description>Aggregate test modules</description>
+    <modules>
+        <module>test-module-1</module>
+        <module>test-module-2</module>
+    </modules>
+
+    <parent>
+        <groupId>io.github.tia-ru</groupId>
+        <artifactId>spring-properties-parent</artifactId>
+        <version>0.1</version>
+        <relativePath/>
+    </parent>
+    <dependencies>
+        <dependency>
+            <groupId>io.github.tia-ru</groupId>
+            <artifactId>spring-properties-processor</artifactId>
+            <version>${project.version}</version>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.github.tia-ru</groupId>
+                <artifactId>spring-properties-maven-plugin</artifactId>
+                <version>${project.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-xml-properties-metadata</id>
+                        <goals>
+                            <goal>generate-xml-properties-metadata</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <annotationProcessors>
+                        <annotationProcessor>
+                            <groupId>io.github.tia-ru</groupId>
+                            <artifactId>spring-configuration-processor</artifactId>
+                            <version>0.1</version>
+                        </annotationProcessor>
+                    </annotationProcessors>
+                </configuration>
+            </plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <!--<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>-->
+        </plugins>
+    </build>
+</project>

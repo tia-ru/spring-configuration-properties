@@ -1,0 +1,40 @@
+# Main
+*~
+*.lock
+*.swp
+*.DS_Store
+*.log
+*.tar
+*.zip
+Thumbs.db
+
+# Maven
+target/
+release.properties
+pom.xml.next
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Eclipse
+.classpath
+.project
+.settings
+.metadata/
+.factorypath
+
+# Idea
+*.iml
+.idea/
+
+#MergeTool
+*.orig
+*.log.*
+
+#NetBeans
+nb-configuration.xml
+nbactions.xml
+

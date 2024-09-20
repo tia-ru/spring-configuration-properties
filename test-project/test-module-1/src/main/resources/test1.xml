@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans">
+    <bean class="aaa">
+        <!--<property name="qqq2" value="${xml.prop1}"/>-->
+        <property name="qqq2" value="${xml.prop1New}"/>
+    </bean>
+
+    <bean id="soActualizerBean" class="ru.intertrust.cmj.af.so.actualizer.SOActualizer" lazy-init="false">
+        <constructor-arg index="0" value="${cmj.SOActualizer.ReadOnly:true}" />
+        <constructor-arg index="1" value="${cmj.SOActualizer.BeardTypes:}" />
+    </bean>
+</beans>

@@ -1,0 +1,118 @@
+{
+  "groups": [
+    {
+      "name": "",
+      "type": "test1.xml",
+      "sourceType": "D:\\proto\\spring-configuration-processor\\test-project\\build\\resources\\main\\test1.xml"
+    },
+    {
+      "name": "",
+      "type": "D:\\proto\\spring-configuration-processor\\test-project\\build\\resources\\main\\test\\test2.xml",
+      "sourceType": "D:\\proto\\spring-configuration-processor\\test-project\\build\\resources\\main\\test\\test2.xml"
+    },
+    {
+      "name": "",
+      "type": "ru.tia.spring.configurationprocessor.test.AnotherConfigWithValue",
+      "sourceType": "ru.tia.spring.configurationprocessor.test.AnotherConfigWithValue"
+    },
+    {
+      "name": "",
+      "type": "ru.tia.spring.configurationprocessor.test.ConfigWithValue",
+      "sourceType": "ru.tia.spring.configurationprocessor.test.ConfigWithValue"
+    }
+  ],
+  "properties": [
+    {
+      "name": "cmj.auth.alter.type",
+      "type": "java.lang.String",
+      "sourceType": "ru.tia.spring.configurationprocessor.test.ConfigWithValue"
+    },
+    {
+      "name": "cmj.bool",
+      "type": "java.lang.Boolean",
+      "sourceType": "ru.tia.spring.configurationprocessor.test.ConfigWithValue"
+    },
+    {
+      "name": "cmj.enum",
+      "type": "ru.tia.spring.configurationprocessor.test.util.AnEnum",
+      "sourceType": "ru.tia.spring.configurationprocessor.test.AnotherConfigWithValue"
+    },
+    {
+      "name": "cmj.enum-set",
+      "type": "java.util.Set<ru.tia.spring.configurationprocessor.test.util.AnEnum>",
+      "sourceType": "ru.tia.spring.configurationprocessor.test.AnotherConfigWithValue"
+    },
+    {
+      "name": "cmj.not-exist-int",
+      "type": "java.lang.Integer",
+      "sourceType": "ru.tia.spring.configurationprocessor.test.ConfigWithValue",
+      "defaultValue": "100"
+    },
+    {
+      "name": "cmj.part1",
+      "type": "java.lang.String",
+      "sourceType": "ru.tia.spring.configurationprocessor.test.ConfigWithValue",
+      "defaultValue": "${cmj.part1.1:default1.1}"
+    },
+    {
+      "name": "cmj.part1.1",
+      "type": "java.lang.String",
+      "sourceType": "ru.tia.spring.configurationprocessor.test.ConfigWithValue",
+      "defaultValue": "default1.1"
+    },
+    {
+      "name": "cmj.part2",
+      "type": "java.lang.String",
+      "sourceType": "ru.tia.spring.configurationprocessor.test.ConfigWithValue",
+      "defaultValue": "default2"
+    },
+    {
+      "name": "cmj.prop.source.file",
+      "type": "java.lang.String",
+      "sourceType": "ru.tia.spring.configurationprocessor.test.AnotherConfigWithValue"
+    },
+    {
+      "name": "cmj.prop.source.file",
+      "type": "java.lang.String",
+      "sourceType": "ru.tia.spring.configurationprocessor.test.ConfigWithValue"
+    },
+    {
+      "name": "cmj2.bool",
+      "type": "java.lang.Boolean",
+      "sourceType": "ru.tia.spring.configurationprocessor.test.ConfigWithValue"
+    },
+    {
+      "name": "cmj2.not-exist",
+      "type": "java.lang.String",
+      "description": "A prop with default",
+      "sourceType": "ru.tia.spring.configurationprocessor.test.ConfigWithValue",
+      "defaultValue": "default"
+    },
+    {
+      "name": "xml.prop1",
+      "type": "java.lang.String",
+      "sourceType": "D:\\proto\\spring-configuration-processor\\test-project\\build\\resources\\main\\test1.xml"
+    },
+    {
+      "name": "xml.prop2",
+      "type": "java.lang.String",
+      "sourceType": "D:\\proto\\spring-configuration-processor\\test-project\\build\\resources\\main\\test\\test2.xml"
+    },
+    {
+      "name": "cmj.param1",
+      "type": "java.lang.String",
+      "sourceType": "ru.tia.spring.configurationprocessor.test.ConfigWithValue",
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "cmj.prop1",
+      "type": "java.lang.String",
+      "description": "@deprecated use prop2 instead",
+      "sourceType": "ru.tia.spring.configurationprocessor.test.ConfigWithValue",
+      "deprecated": true,
+      "deprecation": {}
+    }
+  ],
+  "hints": []
+}
