@@ -56,7 +56,7 @@ public class XmlMetadataScanner {
         } else {
 
             try (Stream<Path> pathStream = Files.find(root, Integer.MAX_VALUE,
-                    ((path, fileAttributes) -> fileAttributes.isRegularFile() && ".xml".equals(StringUtils.getFilenameExtension(path.toString()))))) {
+                    ((path, fileAttributes) -> fileAttributes.isRegularFile() && "xml".equals(StringUtils.getFilenameExtension(path.toString()))))) {
                 rootMetadata = pathStream.filter(XmlMetadataScanner::isSpringXml)
                         .flatMap(path -> getFileMetadata(path).stream())
                         .collect(Collectors.toSet());
