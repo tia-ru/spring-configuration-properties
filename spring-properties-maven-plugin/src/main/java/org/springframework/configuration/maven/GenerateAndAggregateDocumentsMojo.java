@@ -216,13 +216,23 @@ public class GenerateAndAggregateDocumentsMojo extends AbstractMojo {
 
     @Override
     public void execute() {
+        List<AggregationMojoInput> allInputs = collectInputs();
+
+        AggregationDocumenterPatch aggregationDocumenter = new AggregationDocumenterPatch(MetadataReaderPatch.INSTANCE,
+                TemplateCompilerFactory.getInstance(templateCompilerName), MetadataInputResolverContext.INSTANCE,
+                PropertyGroupFilterService.INSTANCE);
+        CreateAggregationCommand createAggregationCommand = createAggregationCommand(allInputs);
+        aggregationDocumenter.createDocumentsAndAggregate(createAggregationCommand);
+
+    }
+
+    private List<AggregationMojoInput> collectInputs() {
         List<AggregationMojoInput> allInputs = new ArrayList<>();
         if (inputs != null) {
             allInputs.addAll(inputs);
         }
         //project.getDependencies(); parent.getModel().getModules()
         //project.getProjectReferences(); project.getParent().getParent().getBasedir(); project.getParent().getModel().getParent()
-
 
         List<MavenProject> modules = null;
         if (inputArtifacts != null) {
@@ -271,13 +281,7 @@ public class GenerateAndAggregateDocumentsMojo extends AbstractMojo {
             allInputs.addAll(jars);
 
         }
-
-        AggregationDocumenterPatch aggregationDocumenter = new AggregationDocumenterPatch(MetadataReaderPatch.INSTANCE,
-                TemplateCompilerFactory.getInstance(templateCompilerName), MetadataInputResolverContext.INSTANCE,
-                PropertyGroupFilterService.INSTANCE);
-        CreateAggregationCommand createAggregationCommand = createAggregationCommand(allInputs);
-        aggregationDocumenter.createDocumentsAndAggregate(createAggregationCommand);
-
+        return allInputs;
     }
 
     private MavenProject getAggregatorRoot() {

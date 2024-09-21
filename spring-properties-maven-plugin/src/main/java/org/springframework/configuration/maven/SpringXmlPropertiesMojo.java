@@ -54,7 +54,7 @@ public class SpringXmlPropertiesMojo extends AbstractMojo {
 
     @Override
     public void execute() {
-        getLog().info("generate-xml-properties-metadata");
+        //getLog().info("generate-xml-properties-metadata");
         List<Path> xmlLocationPaths;
         if (xmlLocations == null || xmlLocations.isEmpty()) {
             xmlLocationPaths = project.getBuild().getResources().stream()

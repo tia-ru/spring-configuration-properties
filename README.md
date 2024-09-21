@@ -4,6 +4,7 @@
 
 This project provides a set of tools for generating a document that lists the configuration properties of
 a Spring Framework-based project.
+
 -------
 ![](doc/images/markdown-result.png "Result example")
 -------

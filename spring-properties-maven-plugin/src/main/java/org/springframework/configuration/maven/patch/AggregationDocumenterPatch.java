@@ -15,6 +15,7 @@ import com.github.jknack.handlebars.internal.lang3.tuple.Pair;
 import org.rodnansol.core.generator.DocumentGenerationException;
 import org.rodnansol.core.generator.resolver.InputFileResolutionStrategy;
 import org.rodnansol.core.generator.resolver.MetadataInputResolverContext;
+import org.rodnansol.core.generator.template.TemplateMode;
 import org.rodnansol.core.generator.template.TemplateType;
 import org.rodnansol.core.generator.template.compiler.TemplateCompiler;
 import org.rodnansol.core.generator.template.compiler.TemplateCompilerMemoryStoreConstants;
@@ -101,7 +102,15 @@ public class AggregationDocumenterPatch {
         mainTemplateData.setSubTemplateDataList(subTemplateDataList);
         ResolvedTemplate resolvedTemplate = new ResolvedTemplate(createAggregationCommand);
         ImmutablePair<String, String> renderedHeaderAndFooter = renderHeaderAndFooter(resolvedTemplate, mainTemplateData);
-        String aggregatedContent = renderContent(resolvedTemplate, subTemplateDataList);
+
+        TemplateMode templateMode = createAggregationCommand.getTemplateCustomization().getTemplateMode();
+        String aggregatedContent;
+        if (templateMode == TemplateMode.COMPACT){
+            aggregatedContent = renderContent(resolvedTemplate, mainTemplateData);
+        } else {
+            aggregatedContent = renderContent(resolvedTemplate, subTemplateDataList);
+        }
+
         writeRenderedSectionsToFile(createAggregationCommand, renderedHeaderAndFooter, aggregatedContent);
     }
 
@@ -118,6 +127,10 @@ public class AggregationDocumenterPatch {
                 .reduce("", String::concat);
     }
 
+    private String renderContent(ResolvedTemplate resolvedTemplate, MainTemplateData mainTemplateData) {
+        return templateCompiler.compileTemplate(resolvedTemplate.getContentTemplate(), mainTemplateData);
+    }
+
     private void writeRenderedSectionsToFile(CreateAggregationCommand createAggregationCommand, ImmutablePair<String, String> renderedHeaderAndFooter, String aggregatedContent) {
         try {
             try (FileWriter fileWriter = new FileWriter(CoreFileUtils.initializeFileWithPath(createAggregationCommand.getOutput()))) {
@@ -132,7 +145,7 @@ public class AggregationDocumenterPatch {
     }
 
     private SubTemplateData createModuleTemplateData(TemplateCustomization templateCustomization, String sectionName, List<PropertyGroup> propertyGroups, String moduleDescription) {
-        SubTemplateData subTemplateData = new SubTemplateData(sectionName, propertyGroups);
+        SubTemplateData subTemplateData = new SubTemplateDataPatch(sectionName, propertyGroups);
         subTemplateData.setTemplateCustomization(templateCustomization);
         subTemplateData.setGenerationDate(LocalDateTime.now());
         subTemplateData.setModuleDescription(moduleDescription);
@@ -140,7 +153,8 @@ public class AggregationDocumenterPatch {
     }
 
     private MainTemplateData createMainTemplateData(CreateAggregationCommand createAggregationCommand, List<PropertyGroup> propertyGroups) {
-        MainTemplateData mainTemplateData = new MainTemplateData(createAggregationCommand.getAggregatedDocumentHeader(), propertyGroups);
+        MainTemplateData mainTemplateData = new MainTemplateDataPatch(createAggregationCommand.getAggregatedDocumentHeader(), propertyGroups);
+
         mainTemplateData.setMainDescription(createAggregationCommand.getDescription());
         mainTemplateData.setGenerationDate(LocalDateTime.now());
         mainTemplateData.setTemplateCustomization(createAggregationCommand.getTemplateCustomization());
