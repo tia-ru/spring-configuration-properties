@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Does parser fails on comments?-->
+
 <beans xmlns="http://www.springframework.org/schema/beans">
     <bean class="aaa">
         <!--<property name="qqq2" value="${xml.prop1}"/>-->
