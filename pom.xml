@@ -42,6 +42,105 @@
         </developer>
     </developers>
 
+    <distributionManagement>
+        <site>
+            <id>projects-website</id>
+            <url>file://local</url>
+        </site>
+    </distributionManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.12.1</version>
+                <!--<version>3.20.0</version>-->
+                <configuration>
+                    <locales>ru</locales>
+                    <!--<siteDirectory>${project.parent.basedir}/src/site</siteDirectory>-->
+                    <chmod>false</chmod>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.9</version>
+                <!--<version>3.7.0</version>-->
+                <!--<version>3.6.2</version>-->
+                <configuration>
+                    <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
+                    <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+
+                            <report>cim</report> <!-- aka ci-management -->
+                            <report>dependencies</report>
+                            <report>dependency-convergence</report>
+                            <!--<report>dependency-info</report>-->
+                            <report>dependency-management</report>
+                            <report>distribution-management</report>
+                            <report>index</report>
+                            <report>issue-tracking</report>  <!--aka issue-management-->
+                            <report>license</report> <!-- aka licenses-->
+                            <!--<report>mailing-lists</report>-->
+                            <report>modules</report>
+                            <report>plugin-management</report>
+                            <report>plugins</report>
+                            <report>scm</report>
+                            <report>summary</report>
+                            <!--<report>team</report>-->
+                        </reports>
+                    </reportSet>
+                </reportSets>
+
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.2.0</version>
+                <inherited>false</inherited>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <id>aggregate</id>
+                        <reports>
+                            <report>aggregate</report>
+                            <!--<report>aggregate-no-fork</report>-->
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <!--<plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>4.8.6.4</version>
+                <configuration>
+                    <includeFilterFile>${maven.multiModuleProjectDirectory}/spotbugs-security-include.xml</includeFilterFile>
+                    &lt;!&ndash;<excludeFilterFile>spotbugs-security-exclude.xml</excludeFilterFile>&ndash;&gt;
+                    <plugins>
+                        <plugin>
+                            <groupId>com.h3xstream.findsecbugs</groupId>
+                            <artifactId>findsecbugs-plugin</artifactId>
+                            <version>1.13.0</version>
+                        </plugin>
+                    </plugins>
+                </configuration>
+            </plugin>-->
+        </plugins>
+    </reporting>
+
     <profiles>
         <profile>
             <id>publish</id>

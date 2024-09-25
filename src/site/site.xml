@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project name="CMJ"
+        xmlns="http://maven.apache.org/DECORATION/1.8.1"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.1 http://maven.apache.org/xsd/decoration-1.8.1.xsd"
+>
+    <bannerLeft>
+        <name>CMJ</name>
+        <src>./images/banner_bk.png</src>
+        <height>40</height>
+    </bannerLeft>
+
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>1.12.0</version>
+    </skin>
+
+    <version position="left"/>
+    <publishDate position="bottom"/>
+    <poweredBy>
+        <logo name="" img="" href=""/>
+    </poweredBy>
+    <body>
+        <!--<head>
+            <![CDATA[<link rel="stylesheet" href="./css/site.css">]]>
+        </head>-->
+        <menu ref="parent" inherit="top"/>
+        <menu ref="modules" inherit="bottom"/>
+        <menu ref="reports" inherit="bottom"/>
+    </body>
+</project>

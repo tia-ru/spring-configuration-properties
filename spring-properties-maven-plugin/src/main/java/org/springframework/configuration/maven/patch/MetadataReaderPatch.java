@@ -194,12 +194,9 @@ public class MetadataReaderPatch {
         if (type == null) {
             type = "";
         }
-        if (type.startsWith(PACKAGE_JAVA_LANG)) {
-            type = type.substring(PACKAGE_JAVA_LANG.length());
-        }
-        if (type.startsWith(PACKAGE_JAVA_UTIL)) {
-            type = type.substring(PACKAGE_JAVA_UTIL.length());
-        }
+        type = type.replace(PACKAGE_JAVA_LANG,"");
+        type = type.replace(PACKAGE_JAVA_UTIL,"");
+
         return type;
     }
 }

@@ -7,7 +7,7 @@
     <artifactId>spring-properties-test</artifactId>
     <version>0.1</version>
     <packaging>pom</packaging>
-    <name>Spring XML Properties Metadata - Test</name>
+    <name>Test Spring Properties Metadata</name>
     <description>Aggregate test modules</description>
     <modules>
         <module>test-module-1</module>
@@ -18,7 +18,7 @@
         <groupId>io.github.tia-ru</groupId>
         <artifactId>spring-properties-parent</artifactId>
         <version>0.1</version>
-        <relativePath/>
+        <!--<relativePath/>-->
     </parent>
     <dependencies>
         <dependency>
@@ -28,6 +28,12 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
+    <distributionManagement>
+        <site>
+            <id>projects-website</id>
+            <url>file://local/test</url>
+        </site>
+    </distributionManagement>
 
     <build>
         <plugins>
@@ -42,8 +48,40 @@
                             <goal>generate-xml-properties-metadata</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>aggregate-docs-markdown</id>
+                        <inherited>false</inherited>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>generate-and-aggregate-documents</goal>
+                        </goals>
+                        <configuration>
+                            <inputArtifacts>MODULES</inputArtifacts>
+                            <outputFile>${project.build.directory}/generated-site/markdown/cmj-properties</outputFile>
+                            <name>CMJ properties</name>
+                            <description>.</description>
+                            <type>MARKDOWN</type>
+                            <!--<type>HTML</type>-->
+                            <failOnMissingInput>false</failOnMissingInput>
+                            <markdownCustomization>
+                                <includeUnknownGroup>false</includeUnknownGroup>
+                                <removeEmptyGroups>true</removeEmptyGroups>
+                                <tableOfContentsEnabled>false</tableOfContentsEnabled>
+                                <templateMode>COMPACT</templateMode>
+                                <includeGenerationDate>false</includeGenerationDate>
+                            </markdownCustomization>
+                            <htmlCustomization>
+                                <includeUnknownGroup>false</includeUnknownGroup>
+                                <removeEmptyGroups>true</removeEmptyGroups>
+                                <tableOfContentsEnabled>false</tableOfContentsEnabled>
+                                <templateMode>COMPACT</templateMode>
+                            </htmlCustomization>
+
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
+
             <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
