@@ -34,6 +34,8 @@ public class MetadataReaderPatch {
     public static final MetadataReaderPatch INSTANCE = new MetadataReaderPatch();
 
     private static final Logger LOGGER = LoggerFactory.getLogger(org.rodnansol.core.generator.reader.MetadataReader.class);
+    private static final String PACKAGE_JAVA_LANG = "java.lang.";
+    private static final String PACKAGE_JAVA_UTIL = "java.util.";
 
     private MetadataReaderPatch() {
     }
@@ -171,7 +173,8 @@ public class MetadataReaderPatch {
     }
 
     private Property mapToProperty(ItemMetadata itemMetadata) {
-        String type = itemMetadata.getType() == null ? "" : itemMetadata.getType();
+
+        String type = simplifyType(itemMetadata.getType());
         Property property = new Property(itemMetadata.getName(), type);
         property.setDescription(itemMetadata.getDescription());
         if (itemMetadata.getDefaultValue() != null) {
@@ -187,4 +190,16 @@ public class MetadataReaderPatch {
         return property;
     }
 
+    private String simplifyType(String type) {
+        if (type == null) {
+            type = "";
+        }
+        if (type.startsWith(PACKAGE_JAVA_LANG)) {
+            type = type.substring(PACKAGE_JAVA_LANG.length());
+        }
+        if (type.startsWith(PACKAGE_JAVA_UTIL)) {
+            type = type.substring(PACKAGE_JAVA_UTIL.length());
+        }
+        return type;
+    }
 }

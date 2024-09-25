@@ -4,14 +4,20 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.springframework.configurationprocessor.helpers.PropertyPlaceholderHelper;
 import org.springframework.configurationprocessor.helpers.StringUtils;
 import org.springframework.configurationprocessor.metadata.ItemMetadata;
+import xmlparser.XmlParser;
+import xmlparser.model.XmlElement;
 
 public class XmlMetadataScanner {
 
@@ -20,6 +26,7 @@ public class XmlMetadataScanner {
     private static final PropertyPlaceholderHelper PROPERTY_HELPER = new PropertyPlaceholderHelper("${", "}", VALUE_SEPARATOR, true);
 
     private final List<Path> locations;
+    private final XmlParser parser = new XmlParser();
 
     public XmlMetadataScanner(List<Path> locations){
         this.locations = locations;
@@ -70,16 +77,14 @@ public class XmlMetadataScanner {
     private static boolean isSpringXml(Path path) {
         try (Stream<String> lines = Files.lines(path)) {
             return lines.limit(20).anyMatch(s -> s.contains(NAMESPACE_SPRING));
-        } catch (UncheckedIOException e) {
-            //throw new UncheckedIOException(new IOException("Unable to process file " + path, e));
-        } catch (IOException e) {
-            //throw new UncheckedIOException("Unable to process file " + path, e);
+        } catch (IOException | UncheckedIOException ignore) {
         }
         return false;
     }
 
-    private static Set<ItemMetadata> getFileMetadata(Path path) {
+    /*private static Set<ItemMetadata> getFileMetadata(Path path) {
         Set<ItemMetadata> fileMetadata;
+
         try (Stream<String> lines = Files.lines(path)) {
             fileMetadata = lines.flatMap(
                     line -> PROPERTY_HELPER.extractPlaceholders(line).entrySet().stream()
@@ -95,6 +100,45 @@ public class XmlMetadataScanner {
             throw new UncheckedIOException(e);
         }
         return fileMetadata;
+    }*/
+    private Set<ItemMetadata> getFileMetadata(Path path) {
+        Set<ItemMetadata> fileMetadata = new HashSet<>();
+        LinkedBlockingQueue<XmlElement> queue = new LinkedBlockingQueue<>();
+        XmlElement el;
+
+        try {
+            XmlElement root = parser.fromXml(path);
+            queue.offer(root);
+            while ((el = queue.poll()) != null) {
+                if (el instanceof XmlElement.XmlTextElement) {
+                    String value = ((XmlElement.XmlTextElement) el).text;
+                    fileMetadata.addAll( extractMeta(value, path));
+                }
+
+                if (el.attributes != null) {
+                    for (String value : el.attributes.values()) {
+                        fileMetadata.addAll( extractMeta(value, path));
+                    }
+                }
+
+                if (el.children != null) queue.addAll(el.children);
+            }
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+        return fileMetadata;
+    }
+
+    private Collection<ItemMetadata> extractMeta(String value, Path path) {
+        Map<String, String> map = PROPERTY_HELPER.extractPlaceholders(value);
+        return map.entrySet().stream()
+                .map(entry -> {
+                    String placeHolder = entry.getKey();
+                    String defVal = entry.getValue();
+                    ItemMetadata metadata = ItemMetadata.newProperty("", placeHolder, String.class.getCanonicalName(),
+                            path.getFileName().toString(), null, null, defVal, null);
+                    return metadata;
+                }).collect(Collectors.toSet());
     }
 
 

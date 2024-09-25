@@ -7,7 +7,7 @@
     <artifactId>spring-properties-processor</artifactId>
     <version>0.1</version>
 
-    <name>Spring Java Config Properties Metadata Processor</name>
+    <name>Spring Java Properties Metadata - Processor</name>
     <description>Annotation processor for the Spring Configuration Property Documenter</description>
 
     <parent>

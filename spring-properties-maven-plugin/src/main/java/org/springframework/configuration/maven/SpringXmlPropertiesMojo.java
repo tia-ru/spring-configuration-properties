@@ -54,6 +54,8 @@ public class SpringXmlPropertiesMojo extends AbstractMojo {
 
     @Override
     public void execute() {
+        long start = System.currentTimeMillis();
+
         //getLog().info("generate-xml-properties-metadata");
         List<Path> xmlLocationPaths;
         if (xmlLocations == null || xmlLocations.isEmpty()) {
@@ -67,6 +69,9 @@ public class SpringXmlPropertiesMojo extends AbstractMojo {
         }
         MetadataProcessor generator = new MetadataProcessor(xmlLocationPaths, Path.of(metadataDir));
         generator.execute();
+
+        long dur = System.currentTimeMillis() - start;
+        getLog().info("Xml files properties extracted in " + dur + " ms");
 
     }
 }

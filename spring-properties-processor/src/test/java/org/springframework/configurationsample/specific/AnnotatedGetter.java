@@ -16,8 +16,6 @@
 
 package org.springframework.configurationsample.specific;
 
-import javax.validation.constraints.NotEmpty;
-
 import org.springframework.configurationsample.ConfigurationProperties;
 
 /**
@@ -31,7 +29,6 @@ public class AnnotatedGetter {
 
 	private String name;
 
-	@NotEmpty
 	public String getName() {
 		return this.name;
 	}

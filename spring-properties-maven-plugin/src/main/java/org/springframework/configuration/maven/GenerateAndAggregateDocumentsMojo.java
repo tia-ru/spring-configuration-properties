@@ -213,6 +213,9 @@ public class GenerateAndAggregateDocumentsMojo extends AbstractMojo {
     @Inject
     protected ProjectBuilder projectBuilder;
 
+    public GenerateAndAggregateDocumentsMojo() {
+      //  getLog().debug("Start");
+    }
 
     @Override
     public void execute() {
