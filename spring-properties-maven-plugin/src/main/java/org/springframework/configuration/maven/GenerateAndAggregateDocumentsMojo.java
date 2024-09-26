@@ -59,6 +59,7 @@ import org.springframework.configurationprocessor.helpers.StringUtils;
         , aggregator = true
         , threadSafe = true
 )
+
 public class GenerateAndAggregateDocumentsMojo extends AbstractMojo {
 
     protected static final String GOAL_NAME = "generate-and-aggregate-documents";
@@ -66,7 +67,8 @@ public class GenerateAndAggregateDocumentsMojo extends AbstractMojo {
     /**
      * Maven project instance.
      */
-    @Parameter(defaultValue = "${project}", required = true, readonly = true)
+    //@Parameter(defaultValue = "${project}", required = true, readonly = true)
+    @Inject
     MavenProject project;
 
     @Inject

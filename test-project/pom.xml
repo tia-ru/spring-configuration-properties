@@ -51,9 +51,8 @@
                     <execution>
                         <id>aggregate-docs-markdown</id>
                         <inherited>false</inherited>
-                        <phase>pre-site</phase>
                         <goals>
-                            <goal>generate-and-aggregate-documents</goal>
+                            <goal>compile-and-aggregate-documents</goal>
                         </goals>
                         <configuration>
                             <inputArtifacts>MODULES</inputArtifacts>
@@ -133,4 +132,21 @@
             </plugin>
         </plugins>
     </build>
+    <!--<reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <reportSets>
+                    <reportSet>
+                        <id>aggregate</id>
+                        <reports>
+                            <report>aggregate</report>
+                            &lt;!&ndash;<report>aggregate-no-fork</report>&ndash;&gt;
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>-->
 </project>

@@ -17,7 +17,7 @@ public class MainTemplateDataPatch extends MainTemplateData {
     public List<Property> getAggregatedProperties() {
         return getPropertyGroups().stream()
                 .flatMap(groups -> groups.getProperties().stream())
-                .sorted( Comparator.comparing(Property::getFqName))
+                .sorted( Comparator.comparing(property -> property.getFqName().toLowerCase()))
                 .distinct()
                 .collect(Collectors.toList());
     }
