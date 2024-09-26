@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -15,9 +14,9 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.codehaus.plexus.util.xml.Xpp3Dom;
-import org.codehaus.plexus.util.xml.Xpp3DomBuilder;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
+import org.springframework.configuration.maven.xpp3.Xpp3DomBuilderEx;
+import org.springframework.configuration.maven.xpp3.Xpp3DomEx;
 import org.springframework.configurationprocessor.helpers.PropertyPlaceholderHelper;
 import org.springframework.configurationprocessor.helpers.StringUtils;
 import org.springframework.configurationprocessor.metadata.ItemMetadata;
@@ -40,22 +39,6 @@ public class XmlMetadataScanner {
                 .flatMap(root -> getRootMetadata(root).stream())
                 .collect(Collectors.toSet());
 
-       /* return locations.stream()
-                .flatMap(root -> throwingWrapper(() -> Files.find(root, Integer.MAX_VALUE,
-                        (path, fileAttributes) -> fileAttributes.isRegularFile() && ".xml".equals(getFileExtension(path))))
-                ).filter(path -> throwingWrapper(() -> Files.lines(path))
-                        .limit(20)
-                        .anyMatch(s -> s.contains("http://www.springframework.org/schema/"))
-                ).flatMap(path -> throwingWrapper(() -> Files.lines(path))
-                        .flatMap(line -> PROPERTY_HELPER.extractPlaceholders(line).entrySet().stream())
-                        .map(entry -> {
-                            String placeHolder = entry.getKey();
-                            String defVal = entry.getValue();
-                            ItemMetadata metadata = ItemMetadata.newProperty("", placeHolder, String.class.getCanonicalName(),
-                                    path.getFileName().toString(), null, null, defVal, null);
-                            return metadata;
-                        })
-                ).collect(Collectors.toSet());*/
     }
 
     private Set<ItemMetadata> getRootMetadata(Path root) {
@@ -77,76 +60,25 @@ public class XmlMetadataScanner {
     }
 
     private static boolean isSpringXml(Path path) {
-        try (Stream<String> lines = Files.lines(path)) {
-            return lines.limit(20).anyMatch(s -> s.contains(NAMESPACE_SPRING));
-        } catch (IOException | UncheckedIOException ignore) {
-        }
-        return false;
-    }
-
-    /*private static Set<ItemMetadata> getFileMetadata(Path path) {
-        Set<ItemMetadata> fileMetadata;
-
-        try (Stream<String> lines = Files.lines(path)) {
-            fileMetadata = lines.flatMap(
-                    line -> PROPERTY_HELPER.extractPlaceholders(line).entrySet().stream()
-            ).map(entry -> {
-                String placeHolder = entry.getKey();
-                String defVal = entry.getValue();
-                ItemMetadata metadata = ItemMetadata.newProperty("", placeHolder, String.class.getCanonicalName(),
-                        path.getFileName().toString(), null, null, defVal, null);
-                return metadata;
-            }).collect(Collectors.toSet());
-
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-        return fileMetadata;
-    }*/
-
-    /**
-     * Use simplexml
-     * @param path
-     * @return
-     */
-    /*private Set<ItemMetadata> getFileMetadata(Path path) {
-        Set<ItemMetadata> fileMetadata = new HashSet<>();
-        LinkedBlockingQueue<XmlElement> queue = new LinkedBlockingQueue<>();
-        XmlElement el;
-
         try {
-            XmlElement root = parser.fromXml(path);
-            queue.offer(root);
-            while ((el = queue.poll()) != null) {
-                if (el instanceof XmlElement.XmlTextElement) {
-                    String value = ((XmlElement.XmlTextElement) el).text;
-                    fileMetadata.addAll(extractMeta(value, path));
-                }
-
-                if (el.attributes != null) {
-                    for (String value : el.attributes.values()) {
-                        fileMetadata.addAll(extractMeta(value, path));
-                    }
-                }
-
-                if (el.children != null)
-                    queue.addAll(el.children);
-            }
-        } catch (IOException | InvalidXml e){
-            //XML contains non-whitespace characters before opening tag
-            throw new RuntimeException("Unable to process file '" + path +"'. " + e.getMessage(), e);
+            BufferedReader reader = Files.newBufferedReader(path);
+            Xpp3DomEx firstTag = Xpp3DomBuilderEx.buildFirstTag(reader);
+            return firstTag.getAttributes().values().stream()
+                    .anyMatch(v -> v.startsWith(NAMESPACE_SPRING));
+        } catch (IOException | XmlPullParserException e) {
+            throw new RuntimeException(e);
         }
-        return fileMetadata;
-    }*/
+
+    }
 
     private Set<ItemMetadata> getFileMetadata(Path path) {
         Set<ItemMetadata> fileMetadata = new HashSet<>();
-        LinkedBlockingQueue<Xpp3Dom> queue = new LinkedBlockingQueue<>();
-        Xpp3Dom el;
+        LinkedBlockingQueue<Xpp3DomEx> queue = new LinkedBlockingQueue<>();
+        Xpp3DomEx el;
 
         try {
             BufferedReader reader = Files.newBufferedReader(path);
-            Xpp3Dom root =  Xpp3DomBuilder.build(reader);
+            Xpp3DomEx root =  Xpp3DomBuilderEx.build(reader);
             queue.offer(root);
             while ((el = queue.poll()) != null) {
 
@@ -154,12 +86,11 @@ public class XmlMetadataScanner {
                     fileMetadata.addAll(extractMeta(el.getValue(), path));
                 }
 
-                for (String name : el.getAttributeNames()) {
-                    String value = el.getAttribute(name);
+                for (String value : el.getAttributes().values()) {
                     fileMetadata.addAll(extractMeta(value, path));
                 }
 
-                queue.addAll(Arrays.asList(el.getChildren()));
+                queue.addAll(el.getChildList());
             }
         } catch (IOException | XmlPullParserException e){
             throw new RuntimeException("Unable to process file '" + path +"'. " + e.getMessage(), e);
@@ -191,12 +122,6 @@ public class XmlMetadataScanner {
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
-    }*/
-
-    /*void tmp(){
-        DefaultDocumentLoader loader = new DefaultDocumentLoader();
-        Document document = loader.loadDocument();
-        document.getFirstChild().getNodeType()
     }*/
 
 }
