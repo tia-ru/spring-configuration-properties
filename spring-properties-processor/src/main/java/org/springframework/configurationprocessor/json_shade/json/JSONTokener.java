@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package org.springframework.configurationprocessor.json;
-
 // Note: this class was written without inspecting the non-free org.json source code.
+package org.springframework.configurationprocessor.json_shade.json;
 
 /**
  * Parses a JSON (<a href="https://www.ietf.org/rfc/rfc4627.txt">RFC 4627</a>) encoded

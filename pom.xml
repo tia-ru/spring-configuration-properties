@@ -26,7 +26,7 @@
     </modules>
     <scm>
         <url>https://github.com/tia-ru/spring-configuration-properties</url>
-        <connection>scm:git:https://github.com/tia-ru/spring-configuration-properties.git</connection>
+        <!--<connection>scm:git:https://github.com/tia-ru/spring-configuration-properties.git</connection>-->
         <developerConnection>scm:git:https://github.com/tia-ru/spring-configuration-properties.git</developerConnection>
     </scm>
     <licenses>
@@ -50,15 +50,34 @@
     </distributionManagement>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.13.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <!--<version>3.20.0</version> not compatible-->
+                    <version>3.12.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.2.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.12.1</version>
-                <!--<version>3.20.0</version>-->
+
                 <configuration>
                     <locales>ru</locales>
-                    <!--<siteDirectory>${project.parent.basedir}/src/site</siteDirectory>-->
                     <chmod>false</chmod>
                 </configuration>
             </plugin>
@@ -104,24 +123,6 @@
 
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.2.0</version>
-                <inherited>false</inherited>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-                <reportSets>
-                    <reportSet>
-                        <id>aggregate</id>
-                        <reports>
-                            <report>aggregate</report>
-                            <!--<report>aggregate-no-fork</report>-->
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
             <!--<plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
@@ -159,6 +160,20 @@
                             </execution>
                         </executions>
                     </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <configuration>
+                            <additionalJOption>-Xdoclint:none</additionalJOption>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals><goal>jar</goal></goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
                     <plugin>
                         <!-- Run gpg-agent before sign -->
                         <groupId>org.apache.maven.plugins</groupId>
@@ -181,7 +196,15 @@
                         <version>0.5.0</version>
                         <extensions>true</extensions>
                         <configuration>
+                            <!--<skipPublishing>true</skipPublishing>-->
                             <publishingServerId>central</publishingServerId>
+                            <deploymentName>spring-properties-${project.version}</deploymentName>
+                            <outputFilename>spring-properties-${project.version}.zip</outputFilename>
+                            <excludeArtifacts>
+                                <artifact>spring-properties-test</artifact>
+                                <artifact>test-module-1</artifact>
+                                <artifact>test-module-2</artifact>
+                            </excludeArtifacts>
                         </configuration>
                     </plugin>
                 </plugins>

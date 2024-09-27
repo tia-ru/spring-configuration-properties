@@ -26,8 +26,8 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.springframework.configurationprocessor.json.JSONArray;
-import org.springframework.configurationprocessor.json.JSONObject;
+import org.springframework.configurationprocessor.json_shade.json.JSONArray;
+import org.springframework.configurationprocessor.json_shade.json.JSONObject;
 import org.springframework.configurationprocessor.metadata.ConfigurationMetadata;
 import org.springframework.configurationprocessor.metadata.ItemDeprecation;
 import org.springframework.configurationprocessor.metadata.ItemHint;

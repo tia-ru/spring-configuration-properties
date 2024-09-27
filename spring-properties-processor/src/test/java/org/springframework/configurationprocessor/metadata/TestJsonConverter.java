@@ -18,8 +18,8 @@ package org.springframework.configurationprocessor.metadata;
 
 import java.util.Collection;
 
-import org.springframework.configurationprocessor.json.JSONArray;
-import org.springframework.configurationprocessor.json.JSONObject;
+import org.springframework.configurationprocessor.json_shade.json.JSONArray;
+import org.springframework.configurationprocessor.json_shade.json.JSONObject;
 import org.springframework.configurationprocessor.metadata.ItemMetadata.ItemType;
 
 /**

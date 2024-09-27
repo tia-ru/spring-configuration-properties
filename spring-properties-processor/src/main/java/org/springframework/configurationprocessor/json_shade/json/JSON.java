@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package org.springframework.configurationprocessor.json;
+package org.springframework.configurationprocessor.json_shade.json;
 
 class JSON {
 
