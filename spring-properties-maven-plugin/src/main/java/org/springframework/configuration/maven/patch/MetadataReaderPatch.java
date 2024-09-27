@@ -182,9 +182,9 @@ public class MetadataReaderPatch {
         }
         ItemDeprecation deprecation = itemMetadata.getDeprecation();
         if (deprecation != null) {
-            String reason = deprecation.getReason() == null ? "unknown" : deprecation.getReason();
-            String replacement = deprecation.getReplacement() == null ? "unknown" : deprecation.getReplacement();
-            PropertyDeprecation propertyDeprecation = new PropertyDeprecation(reason, replacement);
+            /*String reason = deprecation.getReason() == null ? "unknown" : deprecation.getReason();
+            String replacement = deprecation.getReplacement() == null ? "unknown" : deprecation.getReplacement();*/
+            PropertyDeprecation propertyDeprecation = new PropertyDeprecationPatch(deprecation.getReason(), deprecation.getReplacement());
             property.setPropertyDeprecation(propertyDeprecation);
         }
         return property;

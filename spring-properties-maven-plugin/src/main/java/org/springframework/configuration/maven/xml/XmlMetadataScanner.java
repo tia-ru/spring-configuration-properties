@@ -26,11 +26,18 @@ public class XmlMetadataScanner {
     private static final String NAMESPACE_SPRING = "http://www.springframework.org/schema/";
     private static final String VALUE_SEPARATOR = ":";
     private static final PropertyPlaceholderHelper PROPERTY_HELPER = new PropertyPlaceholderHelper("${", "}", VALUE_SEPARATOR, true);
+    private static final MetadataEnricher DEFAULT_DESCRIPTION_EXTRACTOR = new DefaultMetadataEnricher();
 
     private final List<Path> locations;
+    private final MetadataEnricher metadataEnricher;
+
+    public XmlMetadataScanner(List<Path> locations, MetadataEnricher metadataEnricher){
+        this.locations = locations;
+        this.metadataEnricher = metadataEnricher;
+    }
 
     public XmlMetadataScanner(List<Path> locations){
-        this.locations = locations;
+        this(locations, DEFAULT_DESCRIPTION_EXTRACTOR);
     }
 
     public Set<ItemMetadata> scan() {
@@ -74,23 +81,34 @@ public class XmlMetadataScanner {
     private Set<ItemMetadata> getFileMetadata(Path path) {
         Set<ItemMetadata> fileMetadata = new HashSet<>();
         LinkedBlockingQueue<Xpp3DomEx> queue = new LinkedBlockingQueue<>();
-        Xpp3DomEx el;
+        Xpp3DomEx node;
 
         try {
             BufferedReader reader = Files.newBufferedReader(path);
-            Xpp3DomEx root =  Xpp3DomBuilderEx.build(reader);
+            Xpp3DomEx root =  Xpp3DomBuilderEx.buildWithComments(reader);
             queue.offer(root);
-            while ((el = queue.poll()) != null) {
+            while ((node = queue.poll()) != null) {
 
-                if (StringUtils.hasText(el.getValue())) {
-                    fileMetadata.addAll(extractMeta(el.getValue(), path));
+                if (StringUtils.hasText(node.getValue())) {
+                    Collection<ItemMetadata> metadata = extractMeta(node.getValue(), path);
+                    for (ItemMetadata item : metadata) {
+                         metadataEnricher.enrich(item, node);
+                    }
+
+                    fileMetadata.addAll(metadata);
                 }
 
-                for (String value : el.getAttributes().values()) {
-                    fileMetadata.addAll(extractMeta(value, path));
+                if (node.getAttributes() != null) {
+                    for (String value : node.getAttributes().values()) {
+                        Collection<ItemMetadata> metadata = extractMeta(value, path);
+                        for (ItemMetadata item : metadata) {
+                            metadataEnricher.enrich(item, node);
+                        }
+                        fileMetadata.addAll(metadata);
+                    }
                 }
 
-                queue.addAll(el.getChildList());
+                if (node.getChildList() != null) queue.addAll(node.getChildList());
             }
         } catch (IOException | XmlPullParserException e){
             throw new RuntimeException("Unable to process file '" + path +"'. " + e.getMessage(), e);

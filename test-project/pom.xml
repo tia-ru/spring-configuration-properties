@@ -57,11 +57,13 @@
                         <configuration>
                             <inputArtifacts>MODULES</inputArtifacts>
                             <outputFile>${project.build.directory}/generated-site/markdown/cmj-properties</outputFile>
+
                             <name>CMJ properties</name>
-                            <description>.</description>
+                            <description>Настройки CMJ, выполняемые в файле 'cmj.properties'</description>
                             <type>MARKDOWN</type>
                             <!--<type>HTML</type>-->
                             <failOnMissingInput>false</failOnMissingInput>
+
                             <markdownCustomization>
                                 <includeUnknownGroup>false</includeUnknownGroup>
                                 <removeEmptyGroups>true</removeEmptyGroups>

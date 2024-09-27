@@ -1,9 +1,9 @@
-# Spring Configuration Property Documenter Extended
-![Reactor Scheduler at Maven Central](https://img.shields.io/maven-central/v/io.github.tia-ru/spring-configuration-properties?style=plastic&logo=apachemaven&logoColor=%23C71A36)
-![GitHub License](https://img.shields.io/github/license/tia-ru/spring-configuration-properties?style=plastic)
+# Spring Configuration Property Documenter
+![Spring Configuration Property Documenter at Maven Central](https://img.shields.io/maven-central/v/io.github.tia-ru/spring-configuration-properties?style=plastic&logo=apachemaven&logoColor=%23C71A36)
+![GitHub License](https://img.shields.io/github/license/tia-ru/spring-configuration-properties?style=plastic) 
 
 This project provides a set of tools for generating a document that lists the configuration properties of
-a Spring Framework-based project.
+a Spring Framework-based project from xml config files and java annotations.
 
 -------
 ![](doc/images/markdown-result.png "Result example")
@@ -18,7 +18,7 @@ This annotation processor scans Spring Framework annotations to search for prope
 and appends properties metadata into file `META-INF/spring-configuration-metadata.json` which is in [Spring Boot configuration
 metadata format](https://docs.spring.io/spring-boot/specification/configuration-metadata/format.html).
 
-```
+```xml
 <dependency>
     <groupId>io.github.tia-ru</groupId>
     <artifactId>spring-properties-processor</artifactId>
@@ -37,7 +37,7 @@ This plugin has 2 goals.
 The goal scans spring xml-configuration files to search for properties placeholders `${...}`
 and appends properties metadata into file `META-INF/spring-configuration-metadata.json`
 
-```
+```xml
 <plugin>
     <groupId>io.github.tia-ru</groupId>
     <artifactId>spring-properties-maven-plugin</artifactId>
@@ -58,7 +58,37 @@ Goals' parameters:
 - `xmlLocations` -  List of root directories to search for spring xml-files. Maven module resource directories by default.
 - `metadataDir` - A directory where the generated `spring-configuration-metadata.json` file will be saved.
                   Default value: `${project.build.outputDirectory}/META-INF`
-     
+
+#### XML property description
+Since: 0.2
+
+To add a description for property in xml configuration file, put comment right before a tag with property.
+Write property name at line start (whitespaces before the name is allowed) then description.
+Separate descriptions of different properties with a blank line.
+Write `@deprecated` word in a description to mark a property as deprecated.
+
+---
+**Caution!** _If a property is specified several times in different xml files, 
+then the description from which file will be taken into the report is not defined._
+----
+
+Example:
+
+```xml
+<bean>
+    <!-- app.timeout - property description -->
+    <property name="timeout" value="${app.timeout:60}"/>
+    
+    <!-- app.title.prefix:
+            Multi line 
+            description.
+            @deprecated do not use it anymore
+         
+         app.title - empty line before is separator            
+            -->
+    <property name="title" value="${app.title.prefix:} ${app.title:MyApp}"/>
+</bean>
+```
 ### Goal "generate-and-aggregate-documents"
 
 This goal searches `META-INF/spring-configuration-metadata.json` files from the specified sources
@@ -78,7 +108,7 @@ in addition to the `<inputs>` parameter to search for `META-INF/spring-configura
 - `DEPENDENCIES` - Project modules and external libraries that are in transitive dependencies of current module
 
 
-```
+```xml
 <plugin>
     <groupId>io.github.tia-ru</groupId>
     <artifactId>spring-properties-maven-plugin</artifactId>
@@ -105,3 +135,10 @@ in addition to the `<inputs>` parameter to search for `META-INF/spring-configura
 </plugin>
 ```
 The goal binds to `prepare-package` phase by default.
+
+### Goal "compile-and-aggregate-documents"
+Same as `generate-and-aggregate-documents` but launch forked `compile` phase for child modules before.
+It's usable in aggregator module for `site` phase to trigger 'generate-xml-properties-metadata' goal
+and 'spring-properties-processor' annotation processor to produce metadata and then document before site generation.
+
+The goal binds to `pre-site` phase by default.

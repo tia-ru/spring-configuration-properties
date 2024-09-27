@@ -3,24 +3,37 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans">
     <bean class="aaa">
-        <!--<property name="qqq2" value="${xml.prop1}"/>-->
-        <!-- Это не должно входить в описание
-            xml.prop1New - описание
-        на нескольких строчках.
+    <!--<property name="xxx" value="${xml.prop1}"/>-->
 
-        Это не должно входить в описание
-        -->
+    <!-- Это не должно входить в описание
 
-        <property name="qqq2" value="${xml.prop1New}"/>
+        xml.prop1 - описание
+    на "нескольких" строчках.
+    @deprecated use another one
+
+    Это не должно входить в описание
+    -->
+
+        <property name="qqq2"
+                  value="${xml.prop1}"
+        >
+            <!-- nested-1 - comment-->
+            <nested-1>
+                <!-- nested-1-1
+                     comment -->
+                <nested-1-1>${nested-1-1}</nested-1-1>
+            </nested-1>
+        </property>
+
+        <!-- xml.empty - test -->
+        <empty att="${xml.empty:2}"/>
     </bean>
-
     <bean id="soActualizerBean" class="ru.intertrust.cmj.af.so.actualizer.SOActualizer" lazy-init="false">
         <!-- cmj.SOActualizer.ReadOnly - описание
         на нескольких строчках.
 
         Это не должно входить в описание
         -->
-        <!-- ${cmj.SOActualizer.ReadOnly} -->
         <constructor-arg index="0" value="${cmj.SOActualizer.ReadOnly:true}" />
         <constructor-arg index="1" value="${cmj.SOActualizer.BeardTypes:}" />
     </bean>
