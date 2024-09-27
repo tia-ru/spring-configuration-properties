@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>spring-properties-test</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
     <packaging>pom</packaging>
     <name>Test Spring Properties Metadata</name>
     <description>Aggregate test modules</description>
@@ -17,7 +17,7 @@
     <parent>
         <groupId>io.github.tia-ru</groupId>
         <artifactId>spring-properties-parent</artifactId>
-        <version>0.1</version>
+        <version>0.2</version>
         <!--<relativePath/>-->
     </parent>
     <dependencies>

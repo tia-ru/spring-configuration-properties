@@ -12,6 +12,7 @@ Thumbs.db
 target/
 release.properties
 pom.xml.next
+pom.xml.versionsBackup
 
 # Java
 *.class
