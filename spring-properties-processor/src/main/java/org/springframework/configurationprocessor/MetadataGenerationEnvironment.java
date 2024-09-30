@@ -134,11 +134,12 @@ class MetadataGenerationEnvironment {
 	}
 
 	boolean isDeprecated(Element element) {
-		if (isElementDeprecated(element)) {
+
+		if (typeUtils.isDeprecated(element) || isElementDeprecated(element)) {
 			return true;
 		}
 		if (element instanceof VariableElement || element instanceof ExecutableElement) {
-			return isElementDeprecated(element.getEnclosingElement());
+			return typeUtils.isDeprecated(element.getEnclosingElement()) || isElementDeprecated(element.getEnclosingElement());
 		}
 		return false;
 	}

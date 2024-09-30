@@ -184,6 +184,10 @@ class TypeUtils {
 		return (javadoc == null || javadoc.isEmpty()) ? null : javadoc;
 	}
 
+	boolean isDeprecated(Element element) {
+		return element != null && env.getElementUtils().isDeprecated(element);
+	}
+
 	/**
 	 * Return the {@link PrimitiveType} of the specified type or {@code null} if the type
 	 * does not represent a valid wrapper type.

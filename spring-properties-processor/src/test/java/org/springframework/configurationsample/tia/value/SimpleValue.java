@@ -37,7 +37,20 @@ public class SimpleValue {
     @Value("${not-exist-int:100}")
     int myDefaultInt;
 
-    void method(@Deprecated @Value("${param1}") String myParam1){}
+    /**
+     * @deprecated
+     *
+     * @param myParam1 @deprecated asdd
+     * @param myParam2
+     */
+    void method(
+            @Deprecated
+            @Value("${param1}")
+            String myParam1,
+
+            @Deprecated
+            @Value("${param2}")
+            String myParam2 ){}
 
     @Deprecated
     @Value("setter1")

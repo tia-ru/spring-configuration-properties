@@ -38,7 +38,7 @@
           <nav class="well sidebar-nav">
   <ul class="nav nav-list">
    <li class="nav-header">Parent Project</li>
-    <li><a href="../index.html" title="Spring Properties Documenter"><span class="none"></span>Spring Properties Documenter</a></li>
+    <li><a href="../index.html" title="Spring Properties Reporter"><span class="none"></span>Spring Properties Reporter</a></li>
    <li class="nav-header">&#1053;&#1072;&#1089;&#1090;&#1088;&#1086;&#1081;&#1082;&#1080;</li>
     <li class="active"><a><span class="none"></span>cmj.properties</a></li>
    <li class="nav-header">Modules</li>
@@ -102,96 +102,102 @@
 <td>100</td>
 <td> </td></tr>
 <tr class="a">
-<td align="left">cmj.param1</td>
-<td>String</td>
-<td> </td>
-<td> </td>
-<td>Deprecated</td></tr>
-<tr class="b">
 <td align="left">cmj.part1</td>
 <td>String</td>
 <td> </td>
 <td>${cmj.part1.1:default1.1}</td>
 <td> </td></tr>
-<tr class="a">
+<tr class="b">
 <td align="left">cmj.part1.1</td>
 <td>String</td>
 <td> </td>
 <td>default1.1</td>
 <td> </td></tr>
-<tr class="b">
+<tr class="a">
 <td align="left">cmj.part2</td>
 <td>String</td>
 <td> </td>
 <td>default2</td>
 <td> </td></tr>
-<tr class="a">
+<tr class="b">
 <td align="left">cmj.prop.source.file</td>
 <td>String</td>
 <td> </td>
 <td> </td>
 <td> </td></tr>
-<tr class="b">
+<tr class="a">
 <td align="left">cmj.prop1</td>
 <td>String</td>
 <td>@deprecated use prop2 instead</td>
 <td> </td>
 <td>Deprecated</td></tr>
-<tr class="a">
+<tr class="b">
 <td align="left">cmj.SOActualizer.BeardTypes</td>
 <td>String</td>
 <td> </td>
 <td> </td>
 <td> </td></tr>
-<tr class="b">
+<tr class="a">
 <td align="left">cmj.SOActualizer.ReadOnly</td>
 <td>String</td>
 <td>&#x43e;&#x43f;&#x438;&#x441;&#x430;&#x43d;&#x438;&#x435; &#x43d;&#x430; &#x43d;&#x435;&#x441;&#x43a;&#x43e;&#x43b;&#x44c;&#x43a;&#x438;&#x445; &#x441;&#x442;&#x440;&#x43e;&#x447;&#x43a;&#x430;&#x445;.</td>
 <td>true</td>
 <td> </td></tr>
-<tr class="a">
+<tr class="b">
 <td align="left">cmj2.bool</td>
 <td>Boolean</td>
 <td> </td>
 <td> </td>
 <td> </td></tr>
-<tr class="b">
+<tr class="a">
 <td align="left">cmj2.not-exist</td>
 <td>String</td>
 <td>A prop with default</td>
 <td>default</td>
 <td> </td></tr>
-<tr class="a">
+<tr class="b">
 <td align="left">nested-1-1</td>
 <td>String</td>
 <td>comment</td>
 <td> </td>
 <td> </td></tr>
+<tr class="a">
+<td align="left">param1</td>
+<td>String</td>
+<td>param1 &#x444;&#x44b;&#x432;&#x44f;&#x44b;&#x432;&#x44b;&#x444;&#x444; param2 &#x44b;&#x444;&#x432;&#x444;&#x44b;&#x432;&#x444;&#x44b;&#x432;&#x444;&#x44b;&#x432; @deprecated &#x434;&#x434;&#x434;&#x434;&#x434;&#x434; @param myParam1 @deprecated asdd @param myParam2</td>
+<td> </td>
+<td>Deprecated</td></tr>
 <tr class="b">
+<td align="left">param2</td>
+<td>String</td>
+<td>param1 &#x444;&#x44b;&#x432;&#x44f;&#x44b;&#x432;&#x44b;&#x444;&#x444; param2 &#x44b;&#x444;&#x432;&#x444;&#x44b;&#x432;&#x444;&#x44b;&#x432;&#x444;&#x44b;&#x432; @deprecated &#x434;&#x434;&#x434;&#x434;&#x434;&#x434; @param myParam1 @deprecated asdd @param myParam2</td>
+<td> </td>
+<td>Deprecated</td></tr>
+<tr class="a">
 <td align="left">xml.empty</td>
 <td>String</td>
 <td>test</td>
 <td>2</td>
 <td> </td></tr>
-<tr class="a">
+<tr class="b">
 <td align="left">xml.mod2.prop1</td>
 <td>String</td>
 <td> </td>
 <td> </td>
 <td> </td></tr>
-<tr class="b">
+<tr class="a">
 <td align="left">xml.prop1</td>
 <td>String</td>
 <td>&#x432;&#x442;&#x43e;&#x440;&#x43e;&#x435; &#x43e;&#x43f;&#x438;&#x441;&#x430;&#x43d;&#x438;&#x435; &#x441;&#x432;-&#x432;&#x430;</td>
 <td> </td>
 <td> </td></tr>
-<tr class="a">
+<tr class="b">
 <td align="left">xml.prop1</td>
 <td>String</td>
 <td>&#x43e;&#x43f;&#x438;&#x441;&#x430;&#x43d;&#x438;&#x435; &#x43d;&#x430; &quot;&#x43d;&#x435;&#x441;&#x43a;&#x43e;&#x43b;&#x44c;&#x43a;&#x438;&#x445;&quot; &#x441;&#x442;&#x440;&#x43e;&#x447;&#x43a;&#x430;&#x445;.</td>
 <td> </td>
 <td>Reason: use another one</td></tr>
-<tr class="b">
+<tr class="a">
 <td align="left">xml.prop2</td>
 <td>String</td>
 <td> </td>

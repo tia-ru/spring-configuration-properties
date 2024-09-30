@@ -33,7 +33,21 @@ public class ConfigWithValue {
     @Value("${cmj.not-exist-int:100}")
     int myDefaultInt;
 
-    void method(@Deprecated @Value("${cmj.param1}") String myParam1){}
+    /**
+     * param1 фывяывыфф
+     * param2 ыфвфывфывфыв
+     * @deprecated дддддд
+     *
+     * @param myParam1 @deprecated asdd
+     * @param myParam2
+     */
+    void method(
+            @Value("${param1}")
+            String myParam1,
+
+            @Deprecated
+            @Value("${param2}")
+            String myParam2 ){}
 
     @Deprecated
     @Value("setter1")

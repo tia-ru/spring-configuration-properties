@@ -79,6 +79,15 @@
                     <!--<locales>en,ru</locales>-->
                     <chmod>false</chmod>
                 </configuration>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>site</goal>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>

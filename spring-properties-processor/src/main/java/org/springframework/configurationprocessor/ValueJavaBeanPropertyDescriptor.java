@@ -22,8 +22,6 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeMirror;
 
-import org.springframework.configurationprocessor.metadata.ItemDeprecation;
-
 /**
  * A {@link PropertyDescriptor} for a standard JavaBean property.
  *
@@ -65,12 +63,5 @@ class ValueJavaBeanPropertyDescriptor extends PropertyDescriptor<Element> {
 	protected Object resolveDefaultValue(MetadataGenerationEnvironment environment) {
 		//return environment.getFieldDefaultValue(getOwnerElement(), getName());
 		return defaultValue;
-	}
-
-	@Override
-	protected ItemDeprecation resolveItemDeprecation(MetadataGenerationEnvironment environment) {
-		boolean deprecated = environment.isDeprecated(getGetter()) || environment.isDeprecated(getSetter())
-				|| environment.isDeprecated(getField()) || environment.isDeprecated(getFactoryMethod());
-		return deprecated ? environment.resolveItemDeprecation(getGetter()) : null;
 	}
 }

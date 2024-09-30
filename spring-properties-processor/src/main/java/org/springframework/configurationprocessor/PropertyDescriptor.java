@@ -21,6 +21,9 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeMirror;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 import org.springframework.configurationprocessor.metadata.ConfigurationMetadata;
 import org.springframework.configurationprocessor.metadata.ItemDeprecation;
@@ -99,9 +102,15 @@ abstract class PropertyDescriptor<S extends Element> {
 	protected abstract Object resolveDefaultValue(MetadataGenerationEnvironment environment);
 
 	protected ItemDeprecation resolveItemDeprecation(MetadataGenerationEnvironment environment) {
-		boolean deprecated = environment.isDeprecated(getGetter()) || environment.isDeprecated(getSetter())
-				|| environment.isDeprecated(getField()) || environment.isDeprecated(getFactoryMethod());
-		return deprecated ? environment.resolveItemDeprecation(getGetter()) : null;
+
+		Optional<ItemDeprecation> deprecation = Stream.of(getField(), getGetter(), getSetter(), getFactoryMethod())
+				.filter(element -> environment.isDeprecated(element))
+				.peek(d -> environment.getTypeUtils().getJavaDoc(d))
+				.map(environment::resolveItemDeprecation)
+				.findFirst();
+
+		//new ItemDeprecation(reason, replacement)
+        return deprecation.orElse(null);
 	}
 
 	/*protected boolean isNested(MetadataGenerationEnvironment environment) {
@@ -155,7 +164,17 @@ abstract class PropertyDescriptor<S extends Element> {
 	}
 
 	private String resolveDescription(MetadataGenerationEnvironment environment) {
-		return environment.getTypeUtils().getJavaDoc(getField());
+		return Stream.of(getField(), getGetter(), getSetter(), getFactoryMethod())
+				.filter(Objects::nonNull)
+				.map(e -> {
+					String javaDoc = environment.getTypeUtils().getJavaDoc(e);
+					if (javaDoc == null && e.getEnclosingElement() instanceof ExecutableElement) {
+						javaDoc = environment.getTypeUtils().getJavaDoc(e.getEnclosingElement());
+					}
+					return javaDoc;
+                })
+				.filter(Objects::nonNull)
+				.findFirst().orElse(null);
 	}
 
 	private boolean isCyclePresent(Element returnType, Element element) {
