@@ -1,0 +1,1 @@
+.mvn folder points to directory that becomes ${maven.multiModuleProjectDirectory} property value

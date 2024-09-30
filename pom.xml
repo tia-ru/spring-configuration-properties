@@ -7,7 +7,7 @@
     <groupId>io.github.tia-ru</groupId>
     <artifactId>spring-properties-parent</artifactId>
     <version>0.2</version>
-    <name>Spring Properties Documenter - Parent</name>
+    <name>Spring Properties Documenter</name>
     <packaging>pom</packaging>
     <description>Spring Configuration Property Documenter - Parent</description>
     <url>https://github.com/tia-ru/spring-configuration-properties</url>
@@ -24,7 +24,7 @@
         <module>spring-properties-maven-plugin</module>
         <module>test-project</module>
     </modules>
-    <scm>
+    <scm child.scm.developerConnection.inherit.append.path="false" child.scm.url.inherit.append.path="false">
         <url>https://github.com/tia-ru/spring-configuration-properties</url>
         <!--<connection>scm:git:https://github.com/tia-ru/spring-configuration-properties.git</connection>-->
         <developerConnection>scm:git:https://github.com/tia-ru/spring-configuration-properties.git</developerConnection>
@@ -45,7 +45,7 @@
     <distributionManagement>
         <site>
             <id>projects-website</id>
-            <url>file://local</url>
+            <url>file://${maven.multiModuleProjectDirectory}/docs</url>
         </site>
     </distributionManagement>
 
@@ -75,13 +75,62 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-
                 <configuration>
-                    <locales>ru</locales>
+                    <!--<locales>en,ru</locales>-->
                     <chmod>false</chmod>
                 </configuration>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <releaseProfiles>publish</releaseProfiles>
+                    <!-- <preparationGoals>clean test</preparationGoals> -->
+                    <preparationGoals>clean</preparationGoals>
+                    <goals>deploy</goals>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <localCheckout>true</localCheckout>
+                    <pushChanges>false</pushChanges>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.3.1</version>
+                <!--<configuration>
+                    <excludeDefaultDirectories>true</excludeDefaultDirectories>
+                    <filesets>
+                        <fileset>
+                            <directory>${project.build.directory}</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                        </fileset>
+                    </filesets>
+                </configuration>-->
+                <executions>
+                    <execution>
+                        <id>clean-docs</id>
+                        <inherited>false</inherited>
+                        <phase>clean</phase>
+                        <goals><goal>clean</goal></goals>
+                        <configuration>
+                            <excludeDefaultDirectories>true</excludeDefaultDirectories>
+                            <filesets>
+                                <fileset>
+                                    <directory>${project.basedir}/docs</directory>
+                                    <includes>
+                                        <include>**/*</include>
+                                    </includes>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -106,7 +155,7 @@
                             <report>dependency-convergence</report>
                             <!--<report>dependency-info</report>-->
                             <report>dependency-management</report>
-                            <report>distribution-management</report>
+                            <!--<report>distribution-management</report>-->
                             <report>index</report>
                             <report>issue-tracking</report>  <!--aka issue-management-->
                             <report>license</report> <!-- aka licenses-->

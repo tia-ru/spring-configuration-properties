@@ -6,7 +6,6 @@
     <!--<property name="xxx" value="${xml.prop1}"/>-->
 
     <!-- Это не должно входить в описание
-
         xml.prop1 - описание
     на "нескольких" строчках.
     @deprecated use another one
@@ -14,7 +13,7 @@
     Это не должно входить в описание
     -->
 
-        <property name="qqq2"
+        <property name="first"
                   value="${xml.prop1}"
         >
             <!-- nested-1 - comment-->
@@ -24,6 +23,12 @@
                 <nested-1-1>${nested-1-1}</nested-1-1>
             </nested-1>
         </property>
+
+        <!-- xml.prop1 - второе описание св-ва -->
+        <property name="second" value="${xml.prop1}"/>
+
+        <!-- xml.empty - test -->
+        <empty att="${xml.empty:2}"/>
 
         <!-- xml.empty - test -->
         <empty att="${xml.empty:2}"/>

@@ -28,12 +28,6 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
-    <distributionManagement>
-        <site>
-            <id>projects-website</id>
-            <url>file://local/test</url>
-        </site>
-    </distributionManagement>
 
     <build>
         <plugins>

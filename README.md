@@ -6,11 +6,13 @@ This project provides a set of tools for generating a document that lists the co
 a Spring Framework-based project from xml config files and java annotations.
 
 -------
-![](doc/images/markdown-result.png "Result example")
+![](src/site/resources/images/markdown-result.png "Result example")
 -------
 The tools are like [spring-boot-configuration-processor](https://docs.spring.io/spring-boot/specification/configuration-metadata/annotation-processor.html)
 and [Spring Configuration Property Documenter](https://github.com/rodnansol/spring-configuration-property-documenter)
 but for pure Spring Framework-based projects (not Spring Boot)
+
+[Project site](docs/index.html)
 
 ## Annotation processor "spring-properties-processor"
 
@@ -63,14 +65,19 @@ Goals' parameters:
 Since: 0.2
 
 To add a description for property in xml configuration file, put comment right before a tag with property.
-Write property name at line start (whitespaces before the name is allowed) then description.
-Separate descriptions of different properties with a blank line.
-Write `@deprecated` word in a description to mark a property as deprecated.
+Write property name at line start (whitespaces before the name are ignored) then separator char
+(`:`, or `-`, or new line, or whitespaces), then description.
 
----
-**Caution!** _If a property is specified several times in different xml files, 
-then the description from which file will be taken into the report is not defined._
-----
+Separate descriptions of different properties with a blank line.
+
+Write `@deprecated` word in a description to mark a property as deprecated.
+The text following `@deprecated` is the reason for the deprecation.
+
+If a property is specified multiple times in different xml files and
+has different descriptions, the generated report will contain duplicates of the property
+ 
+>**Limitation:** Xml property type is always reported as `String`.
+
 
 Example:
 
@@ -79,14 +86,19 @@ Example:
     <!-- app.timeout - property description -->
     <property name="timeout" value="${app.timeout:60}"/>
     
-    <!-- app.title.prefix:
-            Multi line 
-            description.
-            @deprecated do not use it anymore
-         
-         app.title - empty line before is separator            
-            -->
-    <property name="title" value="${app.title.prefix:} ${app.title:MyApp}"/>
+    <!--
+     Arbitrary comment that is not part of a property description.
+     app.title.prefix:
+        Multiline 
+        description.
+        @deprecated Do not use the property anymore
+     
+     app.title: empty line before is separator           
+     
+     Arbitrary comment that is not part of a property description.
+    -->
+    
+    <property name="title" value="${app.title.prefix:}${app.title:MyApp}"/>
 </bean>
 ```
 ### Goal "generate-and-aggregate-documents"
@@ -142,3 +154,6 @@ It's usable in aggregator module for `site` phase to trigger 'generate-xml-prope
 and 'spring-properties-processor' annotation processor to produce metadata and then document before site generation.
 
 The goal binds to `pre-site` phase by default.
+
+### Project Site
+[Read next](docs/spring-properties-maven-plugin/plugin-info.html)

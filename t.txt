@@ -1,0 +1,305 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] Spring Properties Documenter - Parent                              [pom]
+[INFO] Spring Java Properties Metadata - Processor                        [jar]
+[INFO] Spring XML Properties Metadata - Maven Plugin             [maven-plugin]
+[INFO] Test Spring Properties Metadata                                    [pom]
+[INFO] test-module-1                                                      [jar]
+[INFO] test-module-2                                                      [jar]
+[INFO] 
+[INFO] -------------< io.github.tia-ru:spring-properties-parent >--------------
+[INFO] Building Spring Properties Documenter - Parent 0.2                 [1/6]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- site:3.12.1:site (default-site) @ spring-properties-parent ---
+[INFO] configuring report plugin org.apache.maven.plugins:maven-project-info-reports-plugin:2.9
+[INFO] 13 reports configured for maven-project-info-reports-plugin:2.9: cim, dependencies, dependency-convergence, dependency-management, distribution-management, index, issue-tracking, license, modules, plugin-management, plugins, scm, summary
+[INFO] Rendering site with default locale русский (ru)
+[INFO] Relativizing decoration links with respect to localized project URL: https://github.com/tia-ru/spring-configuration-properties
+[INFO] Rendering content with org.apache.maven.skins:maven-fluido-skin:jar:1.12.0 skin.
+[INFO] Generating "Сходимость Зависимостей" report --- maven-project-info-reports-plugin:2.9:dependency-convergence
+[INFO] Generating "Distribution Management" report --- maven-project-info-reports-plugin:2.9:distribution-management
+[INFO] Generating "Справка" report       --- maven-project-info-reports-plugin:2.9:index
+[INFO] Generating "Лицензия Проекта" report --- maven-project-info-reports-plugin:2.9:license
+[INFO] Generating "Модули Проекта" report --- maven-project-info-reports-plugin:2.9:modules
+[INFO] Generating "Конфигурация Плагинов" report --- maven-project-info-reports-plugin:2.9:plugin-management
+[INFO] Generating "Модули Проекта" report --- maven-project-info-reports-plugin:2.9:plugins
+[INFO] Generating "Хранилище Кода" report --- maven-project-info-reports-plugin:2.9:scm
+[INFO] Generating "Резюме Проекта" report --- maven-project-info-reports-plugin:2.9:summary
+[INFO] 
+[INFO] --- site:3.12.1:deploy (default-deploy) @ spring-properties-parent ---
+[INFO] Pushing D:\GitRepo\spring-configuration-properties\target\site
+[INFO]    >>> to file://D:\GitRepo\spring-configuration-properties/docs/./
+[INFO] 
+[INFO] ------------< io.github.tia-ru:spring-properties-processor >------------
+[INFO] Building Spring Java Properties Metadata - Processor 0.2           [2/6]
+[INFO]   from spring-properties-processor\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- site:3.12.1:site (default-site) @ spring-properties-processor ---
+[INFO] configuring report plugin org.apache.maven.plugins:maven-project-info-reports-plugin:2.9
+[INFO] 13 reports configured for maven-project-info-reports-plugin:2.9: cim, dependencies, dependency-convergence, dependency-management, distribution-management, index, issue-tracking, license, modules, plugin-management, plugins, scm, summary
+[INFO] Rendering site with default locale русский (ru)
+[INFO] Relativizing decoration links with respect to localized project URL: https://github.com/tia-ru/spring-configuration-properties/spring-properties-processor
+[INFO] Rendering content with org.apache.maven.skins:maven-fluido-skin:jar:1.12.0 skin.
+[INFO] Generating "Зависимости" report   --- maven-project-info-reports-plugin:2.9:dependencies
+[INFO] Generating "Сходимость Зависимостей" report --- maven-project-info-reports-plugin:2.9:dependency-convergence
+[INFO] Generating "Distribution Management" report --- maven-project-info-reports-plugin:2.9:distribution-management
+[INFO] Generating "Справка" report       --- maven-project-info-reports-plugin:2.9:index
+[INFO] Generating "Лицензия Проекта" report --- maven-project-info-reports-plugin:2.9:license
+[INFO] Generating "Конфигурация Плагинов" report --- maven-project-info-reports-plugin:2.9:plugin-management
+[INFO] Generating "Модули Проекта" report --- maven-project-info-reports-plugin:2.9:plugins
+[INFO] Generating "Хранилище Кода" report --- maven-project-info-reports-plugin:2.9:scm
+[INFO] Generating "Резюме Проекта" report --- maven-project-info-reports-plugin:2.9:summary
+[INFO] 
+[INFO] --- site:3.12.1:deploy (default-deploy) @ spring-properties-processor ---
+[INFO] Pushing D:\GitRepo\spring-configuration-properties\spring-properties-processor\target\site
+[INFO]    >>> to file://D:\GitRepo\spring-configuration-properties/docs/spring-properties-processor
+[INFO] 
+[INFO] ----------< io.github.tia-ru:spring-properties-maven-plugin >-----------
+[INFO] Building Spring XML Properties Metadata - Maven Plugin 0.2         [3/6]
+[INFO]   from spring-properties-maven-plugin\pom.xml
+[INFO] ----------------------------[ maven-plugin ]----------------------------
+[INFO] 
+[INFO] --- site:3.12.1:site (default-site) @ spring-properties-maven-plugin ---
+[INFO] configuring report plugin org.apache.maven.plugins:maven-project-info-reports-plugin:2.9
+[INFO] 13 reports configured for maven-project-info-reports-plugin:2.9: cim, dependencies, dependency-convergence, dependency-management, distribution-management, index, issue-tracking, license, modules, plugin-management, plugins, scm, summary
+[INFO] configuring report plugin org.apache.maven.plugins:maven-plugin-report-plugin:3.15.0
+[INFO] preparing maven-plugin-report-plugin:report report requires 'process-classes' forked phase execution
+[INFO] 
+[INFO] >>> plugin-report:3.15.0:report > process-classes @ spring-properties-maven-plugin >>>
+[INFO] 
+[INFO] --- plugin:3.15.0:helpmojo (help-goal) @ spring-properties-maven-plugin ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ spring-properties-maven-plugin ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ spring-properties-maven-plugin ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 18 source files with javac [debug target 11] to target\classes
+[INFO] /D:/GitRepo/spring-configuration-properties/spring-properties-maven-plugin/src/main/java/org/springframework/configuration/maven/xpp3/Xpp3DomEx.java: D:\GitRepo\spring-configuration-properties\spring-properties-maven-plugin\src\main\java\org\springframework\configuration\maven\xpp3\Xpp3DomEx.java uses unchecked or unsafe operations.
+[INFO] /D:/GitRepo/spring-configuration-properties/spring-properties-maven-plugin/src/main/java/org/springframework/configuration/maven/xpp3/Xpp3DomEx.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- plugin:3.15.0:descriptor (default-descriptor) @ spring-properties-maven-plugin ---
+[INFO] Using 'UTF-8' encoding to read mojo source files.
+[INFO] java-annotations mojo extractor found 4 mojo descriptors.
+[INFO] java-javadoc mojo extractor found 0 mojo descriptor.
+[INFO] ant mojo extractor found 0 mojo descriptor.
+[INFO] bsh mojo extractor found 0 mojo descriptor.
+[INFO] 
+[INFO] --- plugin:3.15.0:descriptor (mojo-descriptor) @ spring-properties-maven-plugin ---
+[INFO] Using 'UTF-8' encoding to read mojo source files.
+[INFO] java-annotations mojo extractor found 4 mojo descriptors.
+[INFO] java-javadoc mojo extractor found 0 mojo descriptor.
+[INFO] ant mojo extractor found 0 mojo descriptor.
+[INFO] bsh mojo extractor found 0 mojo descriptor.
+[INFO] 
+[INFO] --- sisu:0.3.5:main-index (generate-index) @ spring-properties-maven-plugin ---
+[INFO] 
+[INFO] <<< plugin-report:3.15.0:report < process-classes @ spring-properties-maven-plugin <<<
+[INFO] 
+[INFO] 'process-classes' forked phase execution for maven-plugin-report-plugin:report report preparation done
+[INFO] 1 report configured for maven-plugin-report-plugin:3.15.0: report
+[INFO] Rendering site with default locale русский (ru)
+[INFO] Relativizing decoration links with respect to localized project URL: https://github.com/tia-ru/spring-configuration-properties/spring-properties-maven-plugin
+[INFO] Rendering content with org.apache.maven.skins:maven-fluido-skin:jar:1.12.0 skin.
+[INFO] Generating "Зависимости" report   --- maven-project-info-reports-plugin:2.9:dependencies
+[INFO] Generating "Сходимость Зависимостей" report --- maven-project-info-reports-plugin:2.9:dependency-convergence
+[INFO] Generating "Distribution Management" report --- maven-project-info-reports-plugin:2.9:distribution-management
+[INFO] Generating "Справка" report       --- maven-project-info-reports-plugin:2.9:index
+[INFO] Generating "Лицензия Проекта" report --- maven-project-info-reports-plugin:2.9:license
+[INFO] Generating "Конфигурация Плагинов" report --- maven-project-info-reports-plugin:2.9:plugin-management
+[INFO] Generating "Модули Проекта" report --- maven-project-info-reports-plugin:2.9:plugins
+[INFO] Generating "Хранилище Кода" report --- maven-project-info-reports-plugin:2.9:scm
+[INFO] Generating "Резюме Проекта" report --- maven-project-info-reports-plugin:2.9:summary
+[INFO] Generating "Plugin Documentation" report --- maven-plugin-report-plugin:3.15.0:report
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<asciiDocCustomization>' to 'aasciiDocCustomization'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<contentTemplate>' to 'acontentTemplate'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<description>' to 'adescription'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<failOnMissingInput>' to 'afailOnMissingInput'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<footerTemplate>' to 'afooterTemplate'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<headerTemplate>' to 'aheaderTemplate'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<htmlCustomization>' to 'ahtmlCustomization'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<inputArtifacts>' to 'ainputArtifacts'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<inputs>' to 'ainputs'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<markdownCustomization>' to 'amarkdownCustomization'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<name>' to 'aname'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<outputFile>' to 'aoutputFile'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<templateCompilerName>' to 'atemplateCompilerName'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<type>' to 'atype'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<xmlCustomization>' to 'axmlCustomization'
+[warn] [XHTML5 Sink] Modified invalid anchor name: 'Optional Parameters' to 'Optional_Parameters'
+[warn] [XHTML5 Sink] Modified invalid anchor name: 'Parameter Details' to 'Parameter_Details'
+[warn] [XHTML5 Sink] Modified invalid anchor name: 'Required Parameters' to 'Required_Parameters'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<asciiDocCustomization>' to 'aasciiDocCustomization'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<contentTemplate>' to 'acontentTemplate'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<description>' to 'adescription'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<failOnMissingInput>' to 'afailOnMissingInput'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<footerTemplate>' to 'afooterTemplate'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<headerTemplate>' to 'aheaderTemplate'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<htmlCustomization>' to 'ahtmlCustomization'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<inputArtifacts>' to 'ainputArtifacts'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<inputs>' to 'ainputs'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<markdownCustomization>' to 'amarkdownCustomization'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<name>' to 'aname'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<outputFile>' to 'aoutputFile'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<templateCompilerName>' to 'atemplateCompilerName'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<type>' to 'atype'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<xmlCustomization>' to 'axmlCustomization'
+[warn] [XHTML5 Sink] Modified invalid anchor name: 'Optional Parameters' to 'Optional_Parameters'
+[warn] [XHTML5 Sink] Modified invalid anchor name: 'Parameter Details' to 'Parameter_Details'
+[warn] [XHTML5 Sink] Modified invalid anchor name: 'Required Parameters' to 'Required_Parameters'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<metadataDir>' to 'ametadataDir'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<xmlLocations>' to 'axmlLocations'
+[warn] [XHTML5 Sink] Modified invalid anchor name: 'Optional Parameters' to 'Optional_Parameters'
+[warn] [XHTML5 Sink] Modified invalid anchor name: 'Parameter Details' to 'Parameter_Details'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<detail>' to 'adetail'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<goal>' to 'agoal'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<indentSize>' to 'aindentSize'
+[warn] [XHTML5 Sink] Modified invalid anchor name: '<lineLength>' to 'alineLength'
+[warn] [XHTML5 Sink] Modified invalid anchor name: 'Optional Parameters' to 'Optional_Parameters'
+[warn] [XHTML5 Sink] Modified invalid anchor name: 'Parameter Details' to 'Parameter_Details'
+[INFO] Detecting plugin requirements history for range [0,): 2 releases, from 0.1 to 0.2
+[warn] [XHTML5 Sink] Modified invalid anchor name: 'Plugin Documentation' to 'Plugin_Documentation'
+[warn] [XHTML5 Sink] Modified invalid anchor name: 'System Requirements History' to 'System_Requirements_History'
+[warn] [XHTML5 Sink] Modified invalid anchor name: 'System Requirements' to 'System_Requirements'
+[INFO] 
+[INFO] --- site:3.12.1:deploy (default-deploy) @ spring-properties-maven-plugin ---
+[INFO] Pushing D:\GitRepo\spring-configuration-properties\spring-properties-maven-plugin\target\site
+[INFO]    >>> to file://D:\GitRepo\spring-configuration-properties/docs/spring-properties-maven-plugin
+[INFO] 
+[INFO] --------------< io.github.tia-ru:spring-properties-test >---------------
+[INFO] Building Test Spring Properties Metadata 0.2                       [4/6]
+[INFO]   from test-project\pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] >>> spring-properties:0.2:compile-and-aggregate-documents (aggregate-docs-markdown) > process-classes @ spring-properties-test >>>
+[INFO] 
+[INFO] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[INFO] Forking Test Spring Properties Metadata 0.2
+[INFO] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[INFO] 
+[INFO] --- spring-properties:0.2:generate-xml-properties-metadata (generate-xml-properties-metadata) @ spring-properties-test ---
+[INFO] Xml files properties extracted in 7 ms
+[INFO] 
+[INFO] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[INFO] Forking test-module-1 0.2
+[INFO] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[INFO] 
+[INFO] --- spring-properties:0.2:generate-xml-properties-metadata (generate-xml-properties-metadata) @ test-module-1 ---
+[INFO] Xml files properties extracted in 32 ms
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ test-module-1 ---
+[INFO] Copying 4 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ test-module-1 ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[INFO] Forking test-module-2 0.2
+[INFO] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[INFO] 
+[INFO] --- spring-properties:0.2:generate-xml-properties-metadata (generate-xml-properties-metadata) @ test-module-2 ---
+[INFO] Xml files properties extracted in 2 ms
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ test-module-2 ---
+[INFO] Copying 2 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ test-module-2 ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] <<< spring-properties:0.2:compile-and-aggregate-documents (aggregate-docs-markdown) < process-classes @ spring-properties-test <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-properties:0.2:compile-and-aggregate-documents (aggregate-docs-markdown) @ spring-properties-test ---
+[INFO] 
+[INFO] --- site:3.12.1:site (default-site) @ spring-properties-test ---
+[INFO] configuring report plugin org.apache.maven.plugins:maven-project-info-reports-plugin:2.9
+[INFO] 13 reports configured for maven-project-info-reports-plugin:2.9: cim, dependencies, dependency-convergence, dependency-management, distribution-management, index, issue-tracking, license, modules, plugin-management, plugins, scm, summary
+[INFO] Rendering site with default locale русский (ru)
+[INFO] Relativizing decoration links with respect to localized project URL: https://github.com/tia-ru/spring-configuration-properties/spring-properties-test
+[INFO] Rendering content with org.apache.maven.skins:maven-fluido-skin:jar:1.12.0 skin.
+[INFO] Rendering 1 Doxia document: 1 markdown
+[INFO] Generating "Зависимости" report   --- maven-project-info-reports-plugin:2.9:dependencies
+[INFO] Generating "Сходимость Зависимостей" report --- maven-project-info-reports-plugin:2.9:dependency-convergence
+[INFO] Generating "Distribution Management" report --- maven-project-info-reports-plugin:2.9:distribution-management
+[INFO] Generating "Справка" report       --- maven-project-info-reports-plugin:2.9:index
+[INFO] Generating "Лицензия Проекта" report --- maven-project-info-reports-plugin:2.9:license
+[INFO] Generating "Модули Проекта" report --- maven-project-info-reports-plugin:2.9:modules
+[INFO] Generating "Конфигурация Плагинов" report --- maven-project-info-reports-plugin:2.9:plugin-management
+[INFO] Generating "Модули Проекта" report --- maven-project-info-reports-plugin:2.9:plugins
+[INFO] Generating "Хранилище Кода" report --- maven-project-info-reports-plugin:2.9:scm
+[INFO] Generating "Резюме Проекта" report --- maven-project-info-reports-plugin:2.9:summary
+[INFO] Rendering 1 generated Doxia document: 1 markdown
+[INFO] 
+[INFO] --- site:3.12.1:deploy (default-deploy) @ spring-properties-test ---
+[INFO] Pushing D:\GitRepo\spring-configuration-properties\test-project\target\site
+[INFO]    >>> to file://D:\GitRepo\spring-configuration-properties/docs/spring-properties-test
+[INFO] 
+[INFO] -------------------< io.github.tia-ru:test-module-1 >-------------------
+[INFO] Building test-module-1 0.2                                         [5/6]
+[INFO]   from test-project\test-module-1\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- site:3.12.1:site (default-site) @ test-module-1 ---
+[INFO] configuring report plugin org.apache.maven.plugins:maven-project-info-reports-plugin:2.9
+[INFO] 13 reports configured for maven-project-info-reports-plugin:2.9: cim, dependencies, dependency-convergence, dependency-management, distribution-management, index, issue-tracking, license, modules, plugin-management, plugins, scm, summary
+[INFO] Rendering site with default locale русский (ru)
+[INFO] Relativizing decoration links with respect to localized project URL: https://github.com/tia-ru/spring-configuration-properties/spring-properties-test/test-module-1
+[INFO] Rendering content with org.apache.maven.skins:maven-fluido-skin:jar:1.12.0 skin.
+[INFO] Generating "Зависимости" report   --- maven-project-info-reports-plugin:2.9:dependencies
+[INFO] Generating "Сходимость Зависимостей" report --- maven-project-info-reports-plugin:2.9:dependency-convergence
+[INFO] Generating "Distribution Management" report --- maven-project-info-reports-plugin:2.9:distribution-management
+[INFO] Generating "Справка" report       --- maven-project-info-reports-plugin:2.9:index
+[INFO] Generating "Лицензия Проекта" report --- maven-project-info-reports-plugin:2.9:license
+[INFO] Generating "Конфигурация Плагинов" report --- maven-project-info-reports-plugin:2.9:plugin-management
+[INFO] Generating "Модули Проекта" report --- maven-project-info-reports-plugin:2.9:plugins
+[INFO] Generating "Хранилище Кода" report --- maven-project-info-reports-plugin:2.9:scm
+[INFO] Generating "Резюме Проекта" report --- maven-project-info-reports-plugin:2.9:summary
+[INFO] 
+[INFO] --- site:3.12.1:deploy (default-deploy) @ test-module-1 ---
+[INFO] Pushing D:\GitRepo\spring-configuration-properties\test-project\test-module-1\target\site
+[INFO]    >>> to file://D:\GitRepo\spring-configuration-properties/docs/spring-properties-test/test-module-1
+[INFO] 
+[INFO] -------------------< io.github.tia-ru:test-module-2 >-------------------
+[INFO] Building test-module-2 0.2                                         [6/6]
+[INFO]   from test-project\test-module-2\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- site:3.12.1:site (default-site) @ test-module-2 ---
+[INFO] configuring report plugin org.apache.maven.plugins:maven-project-info-reports-plugin:2.9
+[INFO] 13 reports configured for maven-project-info-reports-plugin:2.9: cim, dependencies, dependency-convergence, dependency-management, distribution-management, index, issue-tracking, license, modules, plugin-management, plugins, scm, summary
+[INFO] Rendering site with default locale русский (ru)
+[INFO] Relativizing decoration links with respect to localized project URL: https://github.com/tia-ru/spring-configuration-properties/spring-properties-test/test-module-2
+[INFO] Rendering content with org.apache.maven.skins:maven-fluido-skin:jar:1.12.0 skin.
+[INFO] Generating "Зависимости" report   --- maven-project-info-reports-plugin:2.9:dependencies
+[INFO] Generating "Сходимость Зависимостей" report --- maven-project-info-reports-plugin:2.9:dependency-convergence
+[INFO] Generating "Distribution Management" report --- maven-project-info-reports-plugin:2.9:distribution-management
+[INFO] Generating "Справка" report       --- maven-project-info-reports-plugin:2.9:index
+[INFO] Generating "Лицензия Проекта" report --- maven-project-info-reports-plugin:2.9:license
+[INFO] Generating "Конфигурация Плагинов" report --- maven-project-info-reports-plugin:2.9:plugin-management
+[INFO] Generating "Модули Проекта" report --- maven-project-info-reports-plugin:2.9:plugins
+[INFO] Generating "Хранилище Кода" report --- maven-project-info-reports-plugin:2.9:scm
+[INFO] Generating "Резюме Проекта" report --- maven-project-info-reports-plugin:2.9:summary
+[INFO] 
+[INFO] --- site:3.12.1:deploy (default-deploy) @ test-module-2 ---
+[INFO] Pushing D:\GitRepo\spring-configuration-properties\test-project\test-module-2\target\site
+[INFO]    >>> to file://D:\GitRepo\spring-configuration-properties/docs/spring-properties-test/test-module-2
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for Spring Properties Documenter - Parent 0.2:
+[INFO] 
+[INFO] Spring Properties Documenter - Parent .............. SUCCESS [  5.735 s]
+[INFO] Spring Java Properties Metadata - Processor ........ SUCCESS [  1.929 s]
+[INFO] Spring XML Properties Metadata - Maven Plugin ...... SUCCESS [ 11.152 s]
+[INFO] Test Spring Properties Metadata .................... SUCCESS [  1.519 s]
+[INFO] test-module-1 ...................................... SUCCESS [  0.646 s]
+[INFO] test-module-2 ...................................... SUCCESS [  0.683 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  21.872 s
+[INFO] Finished at: 2024-09-29T18:28:47+03:00
+[INFO] ------------------------------------------------------------------------

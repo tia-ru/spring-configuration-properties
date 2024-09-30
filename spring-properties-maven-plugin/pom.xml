@@ -142,6 +142,7 @@
             </plugins>
         </pluginManagement>
         <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
@@ -157,6 +158,7 @@
                             <goal>descriptor</goal>
                         </goals>
                     </execution>
+
                     <execution>
                         <id>help-goal</id>
                         <goals>
@@ -226,7 +228,7 @@
                 <reportSets>
                     <reportSet>
                         <reports>
-                            <report>report-no-fork</report>
+                            <report>report</report>
                         </reports>
                     </reportSet>
                 </reportSets>

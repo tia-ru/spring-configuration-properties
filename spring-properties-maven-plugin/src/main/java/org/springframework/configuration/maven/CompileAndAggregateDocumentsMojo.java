@@ -9,6 +9,7 @@ import org.apache.maven.plugins.annotations.ResolutionScope;
  * Same as {@code 'generate-and-aggregate-documents'} goal, but compile child modules before.
  * It's usable in aggregator module for 'site' phase to trigger 'generate-xml-properties-metadata' goal
  * and 'spring-properties-processor' annotation processor to produce metadata and then document before site generation.
+ * Use the goal if compilation is not performed before, e.g. by javadoc report.
  */
 @Mojo(name = CompileAndAggregateDocumentsMojo.GOAL_NAME
         , defaultPhase = LifecyclePhase.PRE_SITE
