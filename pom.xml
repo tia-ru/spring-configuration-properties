@@ -7,9 +7,9 @@
     <groupId>io.github.tia-ru</groupId>
     <artifactId>spring-properties-parent</artifactId>
     <version>0.2</version>
-    <name>Spring Properties Documenter</name>
+    <name>Spring Properties Reporter</name>
     <packaging>pom</packaging>
-    <description>Spring Configuration Property Documenter - Parent</description>
+    <description>Spring Properties Reporter - Parent</description>
     <url>https://github.com/tia-ru/spring-configuration-properties</url>
 
     <properties>

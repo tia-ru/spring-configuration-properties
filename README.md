@@ -1,5 +1,5 @@
-# Spring Configuration Property Documenter
-![Spring Configuration Property Documenter at Maven Central](https://img.shields.io/maven-central/v/io.github.tia-ru/spring-configuration-properties?style=plastic&logo=apachemaven&logoColor=%23C71A36)
+# Spring Properties Reporter
+![Spring Properties Reporter at Maven Central](https://img.shields.io/maven-central/v/io.github.tia-ru/spring-configuration-properties?style=plastic&logo=apachemaven&logoColor=%23C71A36)
 ![GitHub License](https://img.shields.io/github/license/tia-ru/spring-configuration-properties?style=plastic) 
 
 This project provides a set of tools for generating a document that lists the configuration properties of
@@ -12,7 +12,7 @@ The tools are like [spring-boot-configuration-processor](https://docs.spring.io/
 and [Spring Configuration Property Documenter](https://github.com/rodnansol/spring-configuration-property-documenter)
 but for pure Spring Framework-based projects (not Spring Boot)
 
-[Project site](docs/index.html)
+See [Project documentation](https://tia-ru.github.io/spring-configuration-properties/)
 
 ## Annotation processor "spring-properties-processor"
 
@@ -33,7 +33,8 @@ The processor accepts compiler's `-A` option:
    `META-INF/additional-spring-configuration-metadata.json` file to merge into `META-INF/spring-configuration-metadata.json`
 
 ## Maven plugin "spring-properties-maven-plugin"
-This plugin has 2 goals.
+See [Plugin documentation](https://tia-ru.github.io/spring-configuration-properties/spring-properties-maven-plugin/plugin-info.html)
+and next sections.
 
 ### Goal"generate-xml-properties-metadata"
 The goal scans spring xml-configuration files to search for properties placeholders `${...}`
@@ -106,7 +107,7 @@ Example:
 This goal searches `META-INF/spring-configuration-metadata.json` files from the specified sources
 and render them into one single human-readable document containing all properties documentation.
 
-The goal is extension of "[Spring Configuration Property Documenter](https://github.com/rodnansol/spring-configuration-property-documenter)'s"
+The goal is extension of "[Spring Configuration Property Documenter](https://github.com/rodnansol/spring-configuration-property-documenter/blob/master/docs/modules/ROOT/pages/maven-plugin.adoc#generate-and-aggregate-documents)'s"
 same named goal. For information on usage and configuration, please refer to its documentation.
 
 This goal has just one additional parameter `<inputArtifacts>`. Artifacts specified by the parameter are also included 
@@ -154,6 +155,3 @@ It's usable in aggregator module for `site` phase to trigger 'generate-xml-prope
 and 'spring-properties-processor' annotation processor to produce metadata and then document before site generation.
 
 The goal binds to `pre-site` phase by default.
-
-### Project Site
-[Read next](docs/spring-properties-maven-plugin/plugin-info.html)
