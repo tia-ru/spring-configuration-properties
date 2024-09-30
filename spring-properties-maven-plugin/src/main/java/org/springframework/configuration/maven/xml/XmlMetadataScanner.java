@@ -70,10 +70,11 @@ public class XmlMetadataScanner {
         try {
             BufferedReader reader = Files.newBufferedReader(path);
             Xpp3DomEx firstTag = Xpp3DomBuilderEx.buildFirstTag(reader);
-            return firstTag.getAttributes().values().stream()
-                    .anyMatch(v -> v.startsWith(NAMESPACE_SPRING));
+            return firstTag != null && firstTag.getAttributes() != null
+                    && firstTag.getAttributes().values().stream().anyMatch(v -> v.startsWith(NAMESPACE_SPRING));
         } catch (IOException | XmlPullParserException e) {
-            throw new RuntimeException(e);
+            //throw new RuntimeException("Error parsing file '" + path + "'", e);
+            return false;
         }
 
     }
@@ -86,6 +87,8 @@ public class XmlMetadataScanner {
         try {
             BufferedReader reader = Files.newBufferedReader(path);
             Xpp3DomEx root =  Xpp3DomBuilderEx.buildWithComments(reader);
+            if (root == null) return fileMetadata;
+
             queue.offer(root);
             while ((node = queue.poll()) != null) {
 
