@@ -12,6 +12,7 @@ public class DefaultMetadataEnricher implements MetadataEnricher {
 
     private static final Pattern PATTERN_CRLF = Pattern.compile("[\\n\\r]");
     private static final Pattern PATTERN_REMAINING = Pattern.compile("[\\s-:]+(.*)");
+    public static final String DEPRECATED = "@deprecated";
 
     private final StringBuilder builder = new StringBuilder(2048);
 
@@ -51,11 +52,16 @@ public class DefaultMetadataEnricher implements MetadataEnricher {
             }
         }
 
-        String result = builder.toString();
-        if (result.contains("@deprecated")) {
-            metadata.setDeprecation(new ItemDeprecation());
+        int i = builder.indexOf(DEPRECATED);
+        if (i >= 0) {
+            String deprecation = builder.substring(i + DEPRECATED.length()).trim();
+            builder.setLength(i);
+            if (!StringUtils.hasText(deprecation)){
+                deprecation = null;
+            }
+            metadata.setDeprecation(new ItemDeprecation(deprecation, null));
         }
 
-        metadata.setDescription(result);
+        metadata.setDescription(builder.toString().trim());
     }
 }
