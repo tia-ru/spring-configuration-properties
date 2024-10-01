@@ -1,5 +1,6 @@
 # Spring Properties Reporter
-![Spring Properties Reporter at Maven Central](https://img.shields.io/maven-central/v/io.github.tia-ru/spring-configuration-properties?style=plastic&logo=apachemaven&logoColor=%23C71A36)
+![Spring Properties Reporter at Maven Central](https://img.shields.io/maven-central/v/io.github.tia-ru/spring-properties-parent?style=plastic&logo=apachemaven&logoColor=%23C71A36)
+![JDK 11](https://img.shields.io/badge/JDK-11-green?style=plastic)
 ![GitHub License](https://img.shields.io/github/license/tia-ru/spring-configuration-properties?style=plastic) 
 
 This project provides a set of tools for generating a document that lists the configuration properties of
@@ -12,6 +13,8 @@ The tools are like [spring-boot-configuration-processor](https://docs.spring.io/
 and [Spring Configuration Property Documenter](https://github.com/rodnansol/spring-configuration-property-documenter)
 but for pure Spring Framework-based projects (not Spring Boot)
 
+**Requirements**: JDK 11, Maven 3.0
+
 See [Project documentation](https://tia-ru.github.io/spring-configuration-properties/)
 
 ## Annotation processor "spring-properties-processor"
@@ -19,6 +22,7 @@ See [Project documentation](https://tia-ru.github.io/spring-configuration-proper
 This annotation processor scans Spring Framework annotations to search for properties placeholders `${...}`
 and appends properties metadata into file `META-INF/spring-configuration-metadata.json` which is in [Spring Boot configuration
 metadata format](https://docs.spring.io/spring-boot/specification/configuration-metadata/format.html).
+
 
 ```xml
 <dependency>

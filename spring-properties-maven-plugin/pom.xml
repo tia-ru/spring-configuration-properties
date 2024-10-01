@@ -3,9 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>spring-properties-maven-plugin</artifactId>
-    <version>1.1-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
-
     <name>Spring XML Properties Metadata - Maven Plugin</name>
     <description>Maven plugin module for the Spring Configuration Property Documenter</description>
 
