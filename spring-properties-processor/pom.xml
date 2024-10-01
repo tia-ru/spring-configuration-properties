@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>spring-properties-processor</artifactId>
-    <version>0.2</version>
+    <version>1.0-SNAPSHOT</version>
 
     <name>Spring Java Properties Metadata - Processor</name>
     <description>Annotation processor for the Spring Configuration Property Documenter</description>
@@ -13,7 +13,7 @@
     <parent>
         <groupId>io.github.tia-ru</groupId>
         <artifactId>spring-properties-parent</artifactId>
-        <version>0.2</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
     <dependencies>

@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.tia-ru</groupId>
     <artifactId>spring-properties-parent</artifactId>
-    <version>0.2</version>
+    <version>1.0-SNAPSHOT</version>
     <name>Spring Properties Reporter</name>
     <packaging>pom</packaging>
     <description>Spring Properties Reporter - Parent</description>
@@ -28,7 +26,8 @@
         <url>https://github.com/tia-ru/spring-configuration-properties</url>
         <!--<connection>scm:git:https://github.com/tia-ru/spring-configuration-properties.git</connection>-->
         <developerConnection>scm:git:https://github.com/tia-ru/spring-configuration-properties.git</developerConnection>
-    </scm>
+        <tag>HEAD</tag>
+  </scm>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -79,15 +78,6 @@
                     <!--<locales>en,ru</locales>-->
                     <chmod>false</chmod>
                 </configuration>
-                <executions>
-                    <execution>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>site</goal>
-                            <goal>deploy</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
 
             <plugin>
@@ -95,51 +85,19 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>3.0.1</version>
                 <configuration>
+                    <!--<preparationProfiles>publish</preparationProfiles>-->
+                    <preparationGoals>clean site-deploy</preparationGoals>
                     <releaseProfiles>publish</releaseProfiles>
-                    <!-- <preparationGoals>clean test</preparationGoals> -->
-                    <preparationGoals>clean</preparationGoals>
                     <goals>deploy</goals>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <localCheckout>true</localCheckout>
                     <pushChanges>false</pushChanges>
+                    <tagNameFormat>@{project.version}</tagNameFormat>
+                    <indentSize>4</indentSize>
+                    <addSchema>false</addSchema>
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>3.3.1</version>
-                <!--<configuration>
-                    <excludeDefaultDirectories>true</excludeDefaultDirectories>
-                    <filesets>
-                        <fileset>
-                            <directory>${project.build.directory}</directory>
-                            <includes>
-                                <include>**/*</include>
-                            </includes>
-                        </fileset>
-                    </filesets>
-                </configuration>-->
-                <executions>
-                    <execution>
-                        <id>clean-docs</id>
-                        <inherited>false</inherited>
-                        <phase>clean</phase>
-                        <goals><goal>clean</goal></goals>
-                        <configuration>
-                            <excludeDefaultDirectories>true</excludeDefaultDirectories>
-                            <filesets>
-                                <fileset>
-                                    <directory>${project.basedir}/docs</directory>
-                                    <includes>
-                                        <include>**/*</include>
-                                    </includes>
-                                </fileset>
-                            </filesets>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 
@@ -228,6 +186,31 @@
                         <executions>
                             <execution>
                                 <goals><goal>jar</goal></goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <version>3.3.1</version>
+                        <executions>
+                            <execution>
+                                <id>clean-docs</id>
+                                <inherited>false</inherited>
+                                <phase>clean</phase>
+                                <goals><goal>clean</goal></goals>
+                                <configuration>
+                                    <excludeDefaultDirectories>true</excludeDefaultDirectories>
+                                    <filesets>
+                                        <fileset>
+                                            <directory>${project.basedir}/docs</directory>
+                                            <includes>
+                                                <include>**/*</include>
+                                            </includes>
+                                        </fileset>
+                                    </filesets>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>

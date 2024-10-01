@@ -13,6 +13,7 @@ target/
 release.properties
 pom.xml.next
 pom.xml.versionsBackup
+pom.xml.releaseBackup
 
 # Java
 *.class
