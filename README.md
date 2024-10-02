@@ -120,7 +120,7 @@ in addition to the `<inputs>` parameter to search for `META-INF/spring-configura
 - `DEPENDS_ON_MODULES` _(default)_ - Only project modules that are explicitly in the current module dependencies list (external libraries are not included).
  
 - `MODULES` - All modules in aggregated project (without external libraries). Metadata generation must run after all modules has been compiled.
-  To ensure this, current module should have a dependency on the last compiled module (as war-module usually has).
+  To ensure this, current module should have a dependency on the last compiled module (as war-module usually has). Otherwise use `compile-and-aggregate-documents` goal.
 
 - `DEPENDENCIES` - Project modules and external libraries that are in transitive dependencies of current module
 
@@ -143,9 +143,13 @@ in addition to the `<inputs>` parameter to search for `META-INF/spring-configura
             <type>MARKDOWN</type>
             <failOnMissingInput>false</failOnMissingInput>
             <markdownCustomization>
+                <templateMode>COMPACT</templateMode>
                 <includeUnknownGroup>false</includeUnknownGroup>
-                <removeEmptyGroups>true</removeEmptyGroups>                        
+                <removeEmptyGroups>true</removeEmptyGroups>
+                <tableOfContentsEnabled>false</tableOfContentsEnabled>
+                <includeGenerationDate>false</includeGenerationDate>
             </markdownCustomization>                    
+            
             <inputArtifacts>MODULES</inputArtifacts>
         </configuration>
     </executions>                
@@ -154,8 +158,39 @@ in addition to the `<inputs>` parameter to search for `META-INF/spring-configura
 The goal binds to `prepare-package` phase by default.
 
 ### Goal "compile-and-aggregate-documents"
-Same as `generate-and-aggregate-documents` but launch forked `compile` phase for child modules before.
-It's usable in aggregator module for `site` phase to trigger 'generate-xml-properties-metadata' goal
-and 'spring-properties-processor' annotation processor to produce metadata and then document before site generation.
+Same as `generate-and-aggregate-documents` but launch forked `process-classes` phase for child modules before.
+It's usable in aggregator root module for `site` phase to trigger `generate-xml-properties-metadata` goal
+and `spring-properties-processor` annotation processor to produce jason-metadata before site generation
+and then document.
 
 The goal binds to `pre-site` phase by default.
+
+Example for aggregate root module:
+```xml
+<plugin>
+    <groupId>io.github.tia-ru</groupId>
+    <artifactId>spring-properties-maven-plugin</artifactId>
+    <version>LATEST</version>
+    <executions>
+        <execution>
+            <id>generate-xml-properties-metadata</id>
+            <goals>
+                <goal>generate-xml-properties-metadata</goal>
+            </goals>
+        </execution>
+        <execution>
+            <id>aggregate-docs-markdown</id>
+            <inherited>false</inherited>
+            <goals>
+                <goal>compile-and-aggregate-documents</goal>
+            </goals>
+            <configuration>
+                <inputArtifacts>MODULES</inputArtifacts>
+                <type>MARKDOWN</type>
+                <outputFile>${project.build.directory}/generated-site/markdown/project-properties</outputFile>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+```
+Notice `<inherited>false</inherited>` for `compile-and-aggregate-documents` goal execution. 
